@@ -1,0 +1,28 @@
+### MODUL
+- armada
+- user(pelanggan)
+- transaksi sewa
+- landing page
+- auth (session only)
+
+
+### BUG (unfinished)
+- tombol reset belum fungsi, tombol kembali ke armada index belum ada (edit armada)
+
+
+### ONGOING (last modified - developer)
+- armada (alert gagal - bani)
+
+
+### database
+- 
+
+
+### finished
+- auth (login, register)
+
+
+
+### question 
+- pakai auth forgot password tidak?
+-
