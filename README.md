@@ -33,3 +33,9 @@ Aplikasi sewa mobil adalah platform digital yang memungkinkan pengguna untuk men
 3. **Rentalcars.com:** Platform global yang menawarkan layanan sewa mobil di berbagai negara dengan berbagai pilihan kendaraan.
 
 Dengan berbagai fitur dan kemudahan yang ditawarkan, aplikasi sewa mobil menjadi solusi praktis bagi mereka yang membutuhkan kendaraan untuk berbagai keperluan, baik untuk perjalanan bisnis, liburan, atau kebutuhan mendesak lainnya.
+
+
+### ERD Diagram
+![image](https://github.com/sgitwhyd/sistem-sewa-mobil-samboga/assets/44634025/9e94d5c8-53ef-462f-8f5b-ee27b7c3ecfa)
+
+
