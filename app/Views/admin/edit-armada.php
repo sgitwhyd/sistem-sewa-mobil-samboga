@@ -25,22 +25,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
 
-    <link rel="stylesheet" href="<?= base_url('/'); ?>dashboard/assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="<?= base_url('/'); ?>dashboard/assets/vendore/fonts/boxicons.css" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="<?= base_url('/'); ?>dashboard/assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="<?= base_url('/'); ?>dashboard/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="<?= base_url('/'); ?>dashboard/assets/vendore/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="<?= base_url('/'); ?>dashboard/assets/vendore/css/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="<?= base_url('/'); ?>dashboard/assets/css/demo.css" />
 
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="<?= base_url('/'); ?>dashboard/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-    <link rel="stylesheet" href="<?= base_url('/'); ?>dashboard/assets/vendor/libs/apex-charts/apex-charts.css" />
+    <!-- vendores CSS -->
+    <link rel="stylesheet" href="<?= base_url('/'); ?>dashboard/assets/vendore/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="<?= base_url('/'); ?>dashboard/assets/vendore/libs/apex-charts/apex-charts.css" />
 
     <!-- datatable -->
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.bootstrap5.css">
    
     <!-- Helpers -->
-    <script src="<?= base_url('/'); ?>dashboard/assets/vendor/js/helpers.js"></script>
+    <script src="<?= base_url('/'); ?>dashboard/assets/vendore/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="<?= base_url('/'); ?>dashboard/assets/js/config.js"></script>
@@ -290,19 +290,19 @@
     
 
     <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="<?= base_url('/'); ?>dashboard/assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="<?= base_url('/'); ?>dashboard/assets/vendor/libs/popper/popper.js"></script>
-    <script src="<?= base_url('/'); ?>dashboard/assets/vendor/js/bootstrap.js"></script>
-    <script src="<?= base_url('/'); ?>dashboard/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="<?= base_url('/'); ?>dashboard/assets/vendor/js/menu.js"></script>
+    <!-- build:js assets/vendore/js/core.js -->
+    <script src="<?= base_url('/'); ?>dashboard/assets/vendore/libs/jquery/jquery.js"></script>
+    <script src="<?= base_url('/'); ?>dashboard/assets/vendore/libs/popper/popper.js"></script>
+    <script src="<?= base_url('/'); ?>dashboard/assets/vendore/js/bootstrap.js"></script>
+    <script src="<?= base_url('/'); ?>dashboard/assets/vendore/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="<?= base_url('/'); ?>dashboard/assets/vendore/js/menu.js"></script>
 
     <!-- datatable -->
     <script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.0.7/js/dataTables.bootstrap5.js"></script>
 
-    <!-- Vendors JS -->
-    <script src="<?= base_url('/'); ?>dashboard/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+    <!-- vendores JS -->
+    <script src="<?= base_url('/'); ?>dashboard/assets/vendore/libs/apex-charts/apexcharts.js"></script>
 
     <!-- Main JS -->
     <script src="<?= base_url('/'); ?>dashboard/assets/js/main.js"></script>
