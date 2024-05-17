@@ -39,7 +39,7 @@ class Armada extends BaseController
                 ]
             ],
             'nama_pemilik'    => [
-                'rules' =>'required',
+                'rules' => 'required',
                 'errors' => [
                     'required'    => 'Nama Pemilik tidak boleh kosong!',
                 ]
@@ -79,7 +79,7 @@ class Armada extends BaseController
         $armada = $m_armada->find($this->request->getPost('id'));
         // pengecekan apakah aramada ditemukan (jika diperlukan)
         // 
-        
+
         // define validator
         $validation = \Config\Services::validation();
 
@@ -91,7 +91,7 @@ class Armada extends BaseController
                 ]
             ],
             'nama_pemilik'    => [
-                'rules' =>'required',
+                'rules' => 'required',
                 'errors' => [
                     'required' => 'Nama Pemilik tidak boleh kosong!',
                 ]
@@ -102,13 +102,13 @@ class Armada extends BaseController
         $validation->setRules($rules);
 
         if (!$validation->withRequest($this->request)->run()) {
-            
+
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
 
         $id = $this->request->getPost('id');
         $post_data = $this->request->getPost();
-        
+
         // update dengan menggunakan model
         $model = new M_armada();
         $model->update($id, $post_data);
@@ -132,6 +132,8 @@ class Armada extends BaseController
         return redirect()->to('admin/armada')->with('success', 'Armada berhasil dihapus.');
     }
 
+    public function showCarList()
+    {
+        return view('show-list-car');
+    }
 }
-
-

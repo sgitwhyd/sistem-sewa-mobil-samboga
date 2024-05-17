@@ -34,3 +34,5 @@ $routes->post('/pelanggan/delete', 'Pelanggan::delete');
 $routes->get('/pelanggan/detail/(:num)', 'Pelanggan::detail/$1');
 
 // user
+
+$routes->get('/car-list', 'Armada::showCarList');
