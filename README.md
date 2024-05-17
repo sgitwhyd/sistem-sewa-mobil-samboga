@@ -36,6 +36,6 @@ Dengan berbagai fitur dan kemudahan yang ditawarkan, aplikasi sewa mobil menjadi
 
 
 ### ERD Diagram
-![image](https://github.com/sgitwhyd/sistem-sewa-mobil-samboga/assets/44634025/9e94d5c8-53ef-462f-8f5b-ee27b7c3ecfa)
+![image](https://github.com/sgitwhyd/sistem-sewa-mobil-samboga/assets/44634025/26ba3555-6ada-4afc-9efb-8540ac53508a)
 
 
