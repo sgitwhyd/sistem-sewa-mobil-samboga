@@ -2,16 +2,16 @@
 
 namespace App\Controllers;
 
-use App\Models\M_armada;
+use App\Models\Vehicles;
 use CodeIgniter\API\ResponseTrait;
 
-class Armada extends BaseController
+class ArmadaController extends BaseController
 {
     use ResponseTrait;
     public function index()
     {
-        $m_armada = new M_armada();
-        $armada = $m_armada->findAll();
+        $VehicleModel = new Vehicles();
+        $armada = $VehicleModel->findAll();
         $data = [
             'armada' => $armada
         ];
@@ -32,18 +32,19 @@ class Armada extends BaseController
 
         // definisikan validation rules and custom messages
         $rules = [
-            'no_register' => [
+            'name' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => 'Nomor Registrasi tidak boleh kosong!'
+                    'required' => 'Nama Kendaraan tidak boleh kosong!'
                 ]
             ],
-            'nama_pemilik'    => [
+            'daily_price'    => [
                 'rules' => 'required',
                 'errors' => [
-                    'required'    => 'Nama Pemilik tidak boleh kosong!',
+                    'required'    => 'Harga Sewa tidak boleh kosong!',
                 ]
             ],
+            // validate image
         ];
 
         // Set validation rules and messages
@@ -55,8 +56,17 @@ class Armada extends BaseController
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
 
+        // handle image request
+        $image = $this->request->getFile('image');
+        if ($image->getError() == 4) {
+            $post_data['image'] = 'default.jpg';
+        } else {
+            $image->move('images');
+            $post_data['image'] = $image->getName();
+        }
+
         // Insert data ke database menggunakan model
-        $model = new M_armada();
+        $model = new Vehicles();
         $model->insert($post_data);
 
         return redirect()->to(base_url('admin/armada'))->with('success', 'Armada berhasil ditambahkan.');
@@ -64,8 +74,8 @@ class Armada extends BaseController
 
     public function edit($id)
     {
-        $m_armada = new M_armada();
-        $armada = $m_armada->find($id);
+        $Vehicles = new Vehicles();
+        $armada = $Vehicles->find($id);
         $data = [
             'armada' => $armada
         ];
@@ -75,8 +85,8 @@ class Armada extends BaseController
 
     public function update()
     {
-        $m_armada = new M_armada();
-        $armada = $m_armada->find($this->request->getPost('id'));
+        $Vehicles = new Vehicles();
+        $armada = $Vehicles->find($this->request->getPost('id'));
         // pengecekan apakah aramada ditemukan (jika diperlukan)
         // 
 
@@ -110,7 +120,7 @@ class Armada extends BaseController
         $post_data = $this->request->getPost();
 
         // update dengan menggunakan model
-        $model = new M_armada();
+        $model = new Vehicles();
         $model->update($id, $post_data);
 
         return redirect()->to(base_url('admin/armada'))->with('success', 'Armada berhasil diupdate.');
@@ -118,16 +128,16 @@ class Armada extends BaseController
 
     public function detail($id)
     {
-        $m_armada = new M_armada();
-        $armada = $m_armada->find($id);
+        $Vehicles = new Vehicles();
+        $armada = $Vehicles->find($id);
         return $this->respond($armada);
     }
 
     public function delete()
     {
-        $m_armada = new M_armada();
+        $Vehicles = new Vehicles();
         $id = $this->request->getPost('id');
-        $m_armada->delete($id);
+        $Vehicles->delete($id);
 
         return redirect()->to('admin/armada')->with('success', 'Armada berhasil dihapus.');
     }
