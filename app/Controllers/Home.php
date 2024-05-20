@@ -6,14 +6,22 @@ class Home extends BaseController
 {
     public function index()
     {
-        // cek role
-        if(session()->has('user')) {
-            if(session()->user['role'] == 'ADMIN') {
-                return view('admin/dashboard');
-            }
-            return view('dashboard');
-        }
-        return redirect()->to('login');
+        return view('landing');
+    }
+
+    public function error()
+    {
+        return view('error_403');
+    }
+
+    public function admin() 
+    {
+        return view('admin/dashboard');
+    }
+
+    public function user()
+    {
+        return view('dashboard');
     }
     
 }

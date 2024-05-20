@@ -20,4 +20,19 @@ class Users extends Model
     ];
 
     protected $useTimestamps = false;
+
+    public function hasPermission($userID, $access) {
+        $user = $this->find($userID);
+        switch ($access) {
+            case 'manage_admin':
+                return $user['role'] == 'ADMIN';
+                break;
+            case 'manage_user':
+                return $user['role'] == 'USER';
+                break;
+            default:
+                // return false;
+                break;
+        }
+    }
 }

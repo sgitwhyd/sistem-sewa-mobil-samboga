@@ -4,17 +4,14 @@ namespace App\Controllers;
 
 use App\Models\Users;
 
-class Auth extends BaseController 
+class AuthController extends BaseController 
 {
     public function login() {
-      // cek session
-      // *jika sudah login direct ke dashboard
-      // 
-      return view('login');
+      return view('auth/login');
     }
 
     public function register() {
-      return view('registrasi');
+      return view('auth/registrasi');
     }
 
     public function logout() {
@@ -30,10 +27,10 @@ class Auth extends BaseController
 
       // definisikan validation rules and custom messages
       $rules = [
-         'username' => [
+         'email' => [
             'rules' =>'required',
             'errors' => [
-               'required' => 'Username tidak boleh kosong!'
+               'required' => 'Email tidak boleh kosong!'
             ]
          ],
          'password' => [
@@ -53,27 +50,31 @@ class Auth extends BaseController
          return redirect()->back()->withInput()->with('errors', $validation->getErrors());
       }
 
-      // check username | email | password
-      $users = new Users();
-      $user = $users->where('username', $this->request->getPost('username'))->orWhere('email', $this->request->getPost('username'))->first();
+      // check email | password
+      $userModel = new Users();
+      $user = $userModel->where('email', $this->request->getPost('email'))->first();
       // jika user tidak ditemukan
       if (!$user) {
-         return redirect()->back()->withInput()->with('errors', ['username' => 'Username atau password salah!']);
+         return redirect()->back()->withInput()->with('errors', ['Email' => 'Email atau password salah!']);
       }
       // cek password
       if (!password_verify($this->request->getPost('password'), $user['password'])) {
-         return redirect()->back()->withInput()->with('errors', ['password' => 'Username atau password salah!']);
+         return redirect()->back()->withInput()->with('errors', ['password' => 'Email atau password salah!']);
       }
 
       // buat session login
-      // 
       $session = session();
       $session->set([
+         'isLogin' => true,
          'user' => $user,
       ]);
 
+      if($user['role'] == 'ADMIN') {
+         return redirect()->to(base_url('admin/dashboard'));
+      } else if ($user['role'] == 'USER') {
+         return redirect()->to(base_url('user/dashboard'));
+      }
 
-      return redirect()->to(base_url('/'));
     }
 
     public function verifyRegister() {
@@ -82,10 +83,16 @@ class Auth extends BaseController
 
       // definisikan validation rules and custom messages
       $rules = [
-         'username' => [
+         'first_name' => [
             'rules' => 'required',
             'errors' => [
-               'required' => 'Username tidak boleh kosong!'
+               'required' => 'First name tidak boleh kosong!'
+            ]
+         ],
+         'last_name' => [
+            'rules' => 'required',
+            'errors' => [
+               'required' => 'Last name tidak boleh kosong!'
             ]
          ],
          'email'    => [
@@ -122,7 +129,8 @@ class Auth extends BaseController
 
       // jika validasi berhasil, proses data
       $data = [
-         'username' => $this->request->getPost('username'),
+         'first_name' => $this->request->getPost('first_name'),
+         'last_name' => $this->request->getPost('last_name'),
          'email' => $this->request->getPost('email'),
          'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
          'role' => 'USER',

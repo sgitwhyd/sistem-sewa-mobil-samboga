@@ -7,31 +7,44 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 $routes->get('/', 'Home::index');
+$routes->get('/error', 'Home::error');
 
-//  auth
-$routes->get('/login', 'Auth::login');
-$routes->get('/logout', 'Auth::logout');
-$routes->get('/register', 'Auth::register');
-$routes->post('/register', 'Auth::verifyRegister');
-$routes->post('/login', 'Auth::verifyLogin');
+// user role
+$routes->group('user', ['filter' => ['auth','authorized:manage_user']], function($routes) {
+   $routes->get('dashboard', 'Home::user');
 
-// admin armada
-$routes->get('/admin/armada', 'Armada::index');
-$routes->get('/admin/add-armada', 'Armada::create');
-$routes->post('/admin/add-armada', 'Armada::store');
-$routes->get('/admin/edit-armada/(:num)', 'Armada::edit/$1');
-$routes->post('/admin/edit-armada/(:num)', 'Armada::update/$1');
-$routes->post('/armada/delete', 'Armada::delete');
-$routes->get('/armada/detail/(:num)', 'Armada::detail/$1');
+});
 
-// admin pelanggan
-$routes->get('/admin/pelanggan', 'Pelanggan::index');
-$routes->get('/admin/add-pelanggan', 'Pelanggan::create');
-$routes->post('/admin/add-pelanggan', 'Pelanggan::store');
-$routes->get('/admin/edit-pelanggan/(:num)', 'Pelanggan::edit/$1');
-$routes->post('/admin/edit-pelanggan/(:num)', 'Pelanggan::update/$1');
-$routes->post('/pelanggan/delete', 'Pelanggan::delete');
-$routes->get('/pelanggan/detail/(:num)', 'Pelanggan::detail/$1');
+//  AuthController
+$routes->get('/login', 'AuthController::login');
+$routes->get('/logout', 'AuthController::logout');
+$routes->get('/register', 'AuthController::register');
+$routes->post('/register', 'AuthController::verifyRegister');
+$routes->post('/login', 'AuthController::verifyLogin');
+
+$routes->group('admin', ['filter' => ['auth','authorized:manage_admin']], function($routes) {
+   $routes->get('dashboard', 'Home::admin');
+
+   // admin armada
+   $routes->get('armada', 'ArmadaController::index');
+   $routes->get('add-armada', 'ArmadaController::create');
+   $routes->post('add-armada', 'ArmadaController::store');
+   $routes->get('edit-armada/(:num)', 'ArmadaController::edit/$1');
+   $routes->post('edit-armada/(:num)', 'ArmadaController::update/$1');
+   $routes->post('delete', 'ArmadaController::delete');
+   $routes->get('armada/detail/(:num)', 'ArmadaController::detail/$1');
+   
+   // admin pelanggan
+   $routes->get('/admin/pelanggan', 'Pelanggan::index');
+   $routes->get('/admin/add-pelanggan', 'Pelanggan::create');
+   $routes->post('/admin/add-pelanggan', 'Pelanggan::store');
+   $routes->get('/admin/edit-pelanggan/(:num)', 'Pelanggan::edit/$1');
+   $routes->post('/admin/edit-pelanggan/(:num)', 'Pelanggan::update/$1');
+   $routes->post('/pelanggan/delete', 'Pelanggan::delete');
+   $routes->get('/pelanggan/detail/(:num)', 'Pelanggan::detail/$1');
+
+});
+
 
 // user
 
