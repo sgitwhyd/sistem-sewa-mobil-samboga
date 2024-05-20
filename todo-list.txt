@@ -24,5 +24,15 @@
 
 
 ### question 
-- pakai auth forgot password tidak?
+- 
 -
+
+
+## rules
+- auth login pake email, cust bisa register
+- register form email, password, first name, last name
+- pake middleware
+- 
+
+- menu user
+   - riwayat transaksi, detail transaksi, profile

@@ -15,10 +15,6 @@ class Users extends Migration
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
-            'username' => [
-                'type' => 'VARCHAR',
-                'constraint' => '100',
-            ],
             'email' => [
                 'type' => 'VARCHAR',
                 'constraint' => '100',
@@ -28,56 +24,35 @@ class Users extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => '255',
             ],
-            'role' => [
-                'type' => 'ENUM',
-                'constraint' => ['ADMIN', 'USER'],
-                'default' => 'USER',
-            ],
-            'name' => [
+            'first_name' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
-            'tgl_lahir' => [
-                'type' => 'DATE',
-                'null' => true,
+            'last_name' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
             ],
-            'jenis_kelamin' => [
-                'type' => 'ENUM',
-                'constraint' => ['Laki-laki', 'Perempuan'],
-                'default' => 'Laki-laki',
-            ],
-            'alamat' => [
+            'address' => [
                 'type' => 'TEXT',
                 'null' => true,
             ],
-            'agama' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50,
-                'null' => true,
-            ],
-            'status_perkawinan' => [
-                'type' => 'ENUM',
-                'constraint' => ['Belum Kawin', 'Kawin', 'Cerai'],
-                'default' => 'Belum Kawin',
-            ],
-            'pekerjaan' => [
+            'telp' => [
                 'type' => 'VARCHAR',
                 'constraint' => 100,
                 'null' => true,
             ],
-            'created_at' => [
-                'type' => 'DATETIME',
+            'ktp_image' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
                 'null' => true,
             ],
-            'updated_at' => [
-                'type' => 'DATETIME',
-                'null' => true,
-            ],
+            'role' => [
+                'type' => 'ENUM',
+                'constraint' => ['ADMIN', 'USER'],
+                'default' => 'USER',
+            ]
         ]);
 
-        $this->forge->addField('created_at DATETIME DEFAULT CURRENT_TIMESTAMP');
-        $this->forge->addField('updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP');
-        
         $this->forge->addKey('id', true);
         $this->forge->createTable('users');
     }
