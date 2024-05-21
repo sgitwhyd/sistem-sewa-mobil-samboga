@@ -15,6 +15,7 @@ class BankSeeder extends Seeder
 
         for ($i = 0; $i < 10; $i++) {
             $data[] = [
+                'bank_name' => $faker->company,
                 'bank_number' => $faker->bankAccountNumber,
                 'bank_owner' => $faker->name,
             ];

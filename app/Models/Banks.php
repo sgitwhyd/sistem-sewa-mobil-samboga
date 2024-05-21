@@ -9,6 +9,7 @@ class Banks extends Model
     protected $table = 'banks';
     protected $primaryKey = 'id';
     protected $allowedFields = [
+        'bank_name',
         'bank_number',
         'bank_owner',
     ];

@@ -15,6 +15,10 @@ class Banks extends Migration
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
+            'bank_name' => [
+                'type' => 'VARCHAR',
+                'constraint' => 50,
+            ],
             'bank_number' => [
                 'type' => 'VARCHAR',
                 'constraint' => 50,
