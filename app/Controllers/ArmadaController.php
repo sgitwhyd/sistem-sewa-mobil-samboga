@@ -61,8 +61,12 @@ class ArmadaController extends BaseController
         if ($image->getError() == 4) {
             $post_data['image'] = 'default.jpg';
         } else {
-            $image->move('images');
-            $post_data['image'] = $image->getName();
+            $timestamp = time();
+            $randomString = bin2hex(random_bytes(6)); // Generate random string
+            $extension = $image->getClientExtension();
+            $newName = $timestamp . '_' . $randomString . '.' . $extension;
+            $image->move('images', $newName);
+            $post_data['image'] = $newName;
         }
 
         // Insert data ke database menggunakan model
@@ -87,41 +91,54 @@ class ArmadaController extends BaseController
     {
         $Vehicles = new Vehicles();
         $armada = $Vehicles->find($this->request->getPost('id'));
-        // pengecekan apakah aramada ditemukan (jika diperlukan)
-        // 
-
+        if(!$armada) return redirect()->back()->withInput()->with('errors', 'Armada tidak ditemukan!');
         // define validator
         $validation = \Config\Services::validation();
 
         $rules = [
-            'no_register' => [
+            'name' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => 'Nomor Registrasi tidak boleh kosong!'
+                    'required' => 'Nama Kendaraan tidak boleh kosong!'
                 ]
             ],
-            'nama_pemilik'    => [
+            'daily_price'    => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => 'Nama Pemilik tidak boleh kosong!',
+                    'required'    => 'Harga Sewa tidak boleh kosong!',
                 ]
             ],
-            // tambahkan rules lain untuk field yang dibutuhka
+            // validate image
         ];
 
         $validation->setRules($rules);
 
         if (!$validation->withRequest($this->request)->run()) {
-
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
-
-        $id = $this->request->getPost('id');
+       
         $post_data = $this->request->getPost();
+
+        // handle image request
+        $image = $this->request->getFile('image');
+        if ($image->getError() == 4) {
+            $post_data['image'] = $armada['image'];
+        } else {
+            // hapus file lama
+            if (file_exists(WRITEPATH . 'images/' . $armada['image'])) {
+                unlink('images/'. $armada['image']);
+            }
+            $timestamp = time();
+            $randomString = bin2hex(random_bytes(6)); // Generate random string
+            $extension = $image->getClientExtension();
+            $newName = $timestamp. '_'. $randomString. '.'. $extension;
+            $image->move('images', $newName);
+            $post_data['image'] = $newName;
+        }
 
         // update dengan menggunakan model
         $model = new Vehicles();
-        $model->update($id, $post_data);
+        $model->update($armada['id'], $post_data);
 
         return redirect()->to(base_url('admin/armada'))->with('success', 'Armada berhasil diupdate.');
     }

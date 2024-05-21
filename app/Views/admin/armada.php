@@ -44,16 +44,18 @@
                     <thead>
                       <tr>
                         <th width="5%">No.</th>
+                        <th width="15%">Gambar</th>
                         <th width="25%">Nama</th>
-                        <th width="50%">Keterangan</th>
-                        <th>Daily Price</th>
-                        <th>Actions</th>
+                        <th width="35%">Keterangan</th>
+                        <th width="15%">Daily Price</th>
+                        <th width="5%">Actions</th>
                       </tr>
                     </thead>
                     <tbody class="table-border-bottom-0" id="tbList">
                       <?php foreach ($armada as $key => $value) : ?>
                         <tr>
                           <td style="text-align:center;"><?= $key+1; ?>.</td>
+                          <td><img width="200px" src="<?= base_url('images/').$value['image']; ?>" alt="car-image"></td>
                           <td><?= $value['name']; ?></td>
                           <td><?= $value['description']; ?></td>
                           <td>Rp. <?= number_format($value['daily_price']); ?></td>
@@ -65,7 +67,7 @@
                               <div class="dropdown-menu">
                                 <button type="button" class="dropdown-item view-detail" data-id="<?= $value['id']; ?>"><i class='bx bxs-file-find me-1' ></i> View</button>
                                 <a class="dropdown-item" href="<?= base_url('admin/edit-armada/'.$value['id']); ?>"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                <form action="<?= base_url('armada/delete') ?>" method="POST" style="display:inline;">
+                                <form action="<?= base_url('admin/armada/delete') ?>" method="POST" style="display:inline;">
                                   <input type="hidden" name="id" value="<?= $value['id']; ?>">
                                   <button type="submit" class="dropdown-item" onclick="return confirm('Are you sure you want to delete this item?');"><i class="bx bx-trash me-1"></i>Delete</button>
                                 </form>
@@ -104,6 +106,8 @@
                     $('#detailArmada').html('<dl class="row mt-2">\
                     <dt class="col-sm-3">Nama Armada</dt>\
                     <dd class="col-sm-9">'+ data['name'] +'</dd>\
+                    <dt class="col-sm-3">Gambar Armada</dt>\
+                    <dd class="col-sm-9"><img width="200px" src="<?= base_url('images/') ?>'+ data['image'] +'" alt="car-image"></dd>\
                     <dt class="col-sm-3">Deskripsi</dt>\
                     <dd class="col-sm-9">'+ data['description'] +'</dd>\
                     <dt class="col-sm-3">Daily Price</dt>\

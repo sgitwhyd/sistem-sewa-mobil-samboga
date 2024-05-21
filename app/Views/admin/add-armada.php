@@ -5,8 +5,7 @@
 <?= $this->endSection(); ?>
 
 <?= $this->section('link'); ?>
-<!-- datatable -->
-<link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.bootstrap5.css">
+<!-- link library -->
 <?= $this->endSection(); ?>
 
 <?= $this->section('content'); ?>
@@ -36,18 +35,19 @@
               <div class="row">
                 <div class="col-md-6 mb-3">
                   <label for="name" class="form-label">Nama Kendaraan</label>
-                  <input type="text" class="form-control" name="name" placeholder="Avanza Veloz" id="name" required>
+                  <input type="text" class="form-control" name="name" placeholder="Avanza Veloz" id="name" value="<?= old('name'); ?>" required>
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="daily_price" class="form-label">Daily Price</label>
-                  <input class="form-control" type="number" name="daily_price" placeholder="350000" id="daily_price" required>
+                  <input class="form-control" type="number" name="daily_price" placeholder="350000" id="daily_price" value="<?= old('daily_price'); ?>" required>
                 </div>
               </div>
             </div>
             <div class="mb-3">
               <label for="description" class="form-label">Deskripsi</label>
-              <textarea class="form-control" name="description" id="description" rows="3" placeholder="warna putih, tranmisi manual, tahun 2015.."></textarea>
+              <textarea class="form-control" name="description" id="description" rows="3" placeholder="warna putih, tranmisi manual, tahun 2015.."><?= old('description'); ?></textarea>
             </div>
+            <!-- preview image here -->
             <div class="mb-3">
               <label for="image" class="form-label">Gambar Kendaraan</label>
               <input class="form-control" type="file" id="image" name="image" >
