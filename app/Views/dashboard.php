@@ -13,12 +13,12 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Landing Page - USER GLOBAL | unlogin state</title>
+    <title>Dasboard - USER</title>
 
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="dashboard/assets/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="<?= base_url('/'); ?>dashboard/assets/img/favicon/favicon.ico" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,24 +27,24 @@
       href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
       rel="stylesheet" />
 
-    <link rel="stylesheet" href="dashboard/assets/vendore/fonts/boxicons.css" />
+    <link rel="stylesheet" href="<?= base_url('/'); ?>dashboard/assets/vendore/fonts/boxicons.css" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="dashboard/assets/vendore/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="dashboard/assets/vendore/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="dashboard/assets/css/demo.css" />
+    <link rel="stylesheet" href="<?= base_url('/'); ?>dashboard/assets/vendore/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="<?= base_url('/'); ?>dashboard/assets/vendore/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="<?= base_url('/'); ?>dashboard/assets/css/demo.css" />
 
     <!-- vendores CSS -->
-    <link rel="stylesheet" href="dashboard/assets/vendore/libs/perfect-scrollbar/perfect-scrollbar.css" />
-    <link rel="stylesheet" href="dashboard/assets/vendore/libs/apex-charts/apex-charts.css" />
+    <link rel="stylesheet" href="<?= base_url('/'); ?>dashboard/assets/vendore/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="<?= base_url('/'); ?>dashboard/assets/vendore/libs/apex-charts/apex-charts.css" />
 
     <!-- Page CSS -->
 
     <!-- Helpers -->
-    <script src="dashboard/assets/vendore/js/helpers.js"></script>
+    <script src="<?= base_url('/'); ?>dashboard/assets/vendore/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="dashboard/assets/js/config.js"></script>
+    <script src="<?= base_url('/'); ?>dashboard/assets/js/config.js"></script>
   </head>
 
   <body>
@@ -105,7 +105,7 @@
                   </g>
                 </svg>
               </span>
-              <span class="app-brand-text demo menu-text fw-bold ms-2">Sneat</span>
+              <span class="app-brand-text demo menu-text fw-bold ms-2">smb rentcar</span>
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -123,22 +123,18 @@
             <!-- Apps -->
             <li class="menu-item">
               <a
-                href="#"
-                target="_blank"
+                href="<?= base_url('user/dashboard'); ?>"
                 class="menu-link">
-                <i class="menu-icon tf-icons bx bx-envelope"></i>
-                <div data-i18n="Email">Dashboard</div>
-                <div class="badge bg-label-primary fs-tiny rounded-pill ms-auto">Pro</div>
+                <i class='menu-icon tf-icons bx bxs-dashboard' ></i>
+                <div data-i18n="Dashboard">Dashboard</div>
               </a>
             </li>
             <li class="menu-item">
               <a
-                href="#"
-                target="_blank"
+                href="<?= base_url('user/car-list'); ?>"
                 class="menu-link">
-                <i class="menu-icon tf-icons bx bx-chat"></i>
-                <div data-i18n="Chat">Car List</div>
-                <div class="badge bg-label-primary fs-tiny rounded-pill ms-auto">Pro</div>
+                <i class="menu-icon tf-icons bx bxs-car-garage"></i>
+                <div data-i18n="Car-list">Car List</div>
               </a>
             </li>
           </ul>
@@ -159,26 +155,12 @@
             </div>
 
             <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-              
               <ul class="navbar-nav flex-row align-items-center ms-auto">
-                <!-- Place this tag where you want the button to render. -->
-                <li class="nav-item lh-1 me-3">
-                  <a
-                    class="github-button"
-                    href="https://github.com/themeselection/sneat-html-admin-template-free"
-                    data-icon="octicon-star"
-                    data-size="large"
-                    data-show-count="true"
-                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
-                    >Star</a
-                  >
-                </li>
-
                 <!-- User -->
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="dashboard/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                      <img src="<?= base_url('/'); ?>dashboard/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -187,12 +169,12 @@
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img src="dashboard/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                              <img src="<?= base_url('/'); ?>dashboard/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-medium d-block">John Doe</span>
-                            <small class="text-muted">Admin</small>
+                            <span class="fw-medium d-block"><?= session('user')['first_name']." ".session('user')['last_name']; ?></span>
+                            <small class="text-muted"><?= session('user')['role']; ?></small>
                           </div>
                         </div>
                       </a>
@@ -201,7 +183,7 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a class="dropdown-item" href="<?= base_url('user/profile'); ?>">
                         <i class="bx bx-user me-2"></i>
                         <span class="align-middle">My Profile</span>
                       </a>
@@ -210,15 +192,6 @@
                       <a class="dropdown-item" href="#">
                         <i class="bx bx-cog me-2"></i>
                         <span class="align-middle">Settings</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <span class="d-flex align-items-center align-middle">
-                          <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                          <span class="flex-grow-1 align-middle ms-1">Billing</span>
-                          <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                        </span>
                       </a>
                     </li>
                     <li>
@@ -816,22 +789,22 @@
     <!-- Core JS -->
     <!-- build:js assets/vendore/js/core.js -->
 
-    <script src="dashboard/assets/vendore/libs/jquery/jquery.js"></script>
-    <script src="dashboard/assets/vendore/libs/popper/popper.js"></script>
-    <script src="dashboard/assets/vendore/js/bootstrap.js"></script>
-    <script src="dashboard/assets/vendore/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="dashboard/assets/vendore/js/menu.js"></script>
+    <script src="<?= base_url('/'); ?>dashboard/assets/vendore/libs/jquery/jquery.js"></script>
+    <script src="<?= base_url('/'); ?>dashboard/assets/vendore/libs/popper/popper.js"></script>
+    <script src="<?= base_url('/'); ?>dashboard/assets/vendore/js/bootstrap.js"></script>
+    <script src="<?= base_url('/'); ?>dashboard/assets/vendore/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="<?= base_url('/'); ?>dashboard/assets/vendore/js/menu.js"></script>
 
     <!-- endbuild -->
 
     <!-- vendores JS -->
-    <script src="dashboard/assets/vendore/libs/apex-charts/apexcharts.js"></script>
+    <script src="<?= base_url('/'); ?>dashboard/assets/vendore/libs/apex-charts/apexcharts.js"></script>
 
     <!-- Main JS -->
-    <script src="dashboard/assets/js/main.js"></script>
+    <script src="<?= base_url('/'); ?>dashboard/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="dashboard/assets/js/dashboards-analytics.js"></script>
+    <script src="<?= base_url('/'); ?>dashboard/assets/js/dashboards-analytics.js"></script>
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

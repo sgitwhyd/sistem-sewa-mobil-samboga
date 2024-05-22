@@ -1,9 +1,10 @@
 ### MODUL
 - armada
+- bank 
 - user(pelanggan)
 - transaksi sewa
 - landing page
-- auth (session only)
+- auth (middleware with filters)
 
 
 ### BUG (unfinished)
@@ -12,7 +13,9 @@
 
 ### task
 - preview image armada (add,edit)
+- preview image user (add,edit,profile)
 - class active menu
+- tampilan list kendaraan (user)
 
 
 ### database
@@ -21,6 +24,9 @@
 
 ### finished
 - auth (login, register)
+- armada CRUD
+- bank CRUD
+- user CRUD
 
 
 

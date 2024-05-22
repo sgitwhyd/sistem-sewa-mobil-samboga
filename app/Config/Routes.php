@@ -11,7 +11,10 @@ $routes->get('/error', 'Home::error');
 
 // user role
 $routes->group('user', ['filter' => ['auth','authorized:manage_user']], function($routes) {
-   $routes->get('dashboard', 'Home::user');
+   $routes->get('dashboard', 'Home::user');  
+   $routes->get('car-list', 'ArmadaController::showCarList');
+   // user profile
+   $routes->get('profile', 'ProfileController::index');
 
 });
 
@@ -24,6 +27,9 @@ $routes->post('/login', 'AuthController::verifyLogin');
 
 $routes->group('admin', ['filter' => ['auth','authorized:manage_admin']], function($routes) {
    $routes->get('dashboard', 'Home::admin');
+
+   // admin profile
+   $routes->get('profile', 'ProfileController::index');
 
    // admin armada
    $routes->get('armada', 'ArmadaController::index');
@@ -53,8 +59,3 @@ $routes->group('admin', ['filter' => ['auth','authorized:manage_admin']], functi
    $routes->get('user/detail/(:num)', 'UserController::detail/$1');
 
 });
-
-
-// user
-
-$routes->get('/car-list', 'Armada::showCarList');

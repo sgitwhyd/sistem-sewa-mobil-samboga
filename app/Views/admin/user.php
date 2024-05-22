@@ -44,10 +44,10 @@
                     <thead>
                       <tr>
                         <th width="5%">No.</th>
-                        <th width="10%">First Name</th>
-                        <th width="10%">Last Name</th>
+                        <th width="10%">Name</th>
                         <th width="35%">Alamat</th>
                         <th width="15%">No Telp</th>
+                        <th width="10%">Role</th>
                         <th width="5%">Actions</th>
                       </tr>
                     </thead>
@@ -55,10 +55,10 @@
                       <?php foreach ($user as $key => $value) : ?>
                         <tr>
                           <td style="text-align:center;"><?= $key+1; ?>.</td>
-                          <td><?= $value['first_name']; ?></td>
-                          <td><?= $value['last_name']; ?></td>
+                          <td><?= $value['first_name'] . " " . $value['last_name']; ?></td>
                           <td><?= $value['address']; ?></td>
                           <td><?= $value['telp']; ?></td>
+                          <td><?= $value['role']; ?></td>
                           <td>
                             <div class="dropdown">
                               <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
