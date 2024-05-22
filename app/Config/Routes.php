@@ -31,17 +31,26 @@ $routes->group('admin', ['filter' => ['auth','authorized:manage_admin']], functi
    $routes->post('add-armada', 'ArmadaController::store');
    $routes->get('edit-armada/(:num)', 'ArmadaController::edit/$1');
    $routes->post('edit-armada/(:num)', 'ArmadaController::update/$1');
-   $routes->post('delete', 'ArmadaController::delete');
+   $routes->post('armada/delete', 'ArmadaController::delete');
    $routes->get('armada/detail/(:num)', 'ArmadaController::detail/$1');
    
-   // admin pelanggan
-   $routes->get('/admin/pelanggan', 'Pelanggan::index');
-   $routes->get('/admin/add-pelanggan', 'Pelanggan::create');
-   $routes->post('/admin/add-pelanggan', 'Pelanggan::store');
-   $routes->get('/admin/edit-pelanggan/(:num)', 'Pelanggan::edit/$1');
-   $routes->post('/admin/edit-pelanggan/(:num)', 'Pelanggan::update/$1');
-   $routes->post('/pelanggan/delete', 'Pelanggan::delete');
-   $routes->get('/pelanggan/detail/(:num)', 'Pelanggan::detail/$1');
+   // admin bank account
+   $routes->get('bank', 'BankController::index');
+   $routes->get('add-bank', 'BankController::create');
+   $routes->post('add-bank', 'BankController::store');
+   $routes->get('edit-bank/(:num)', 'BankController::edit/$1');
+   $routes->post('edit-bank/(:num)', 'BankController::update/$1');
+   $routes->post('bank/delete', 'BankController::delete');
+   $routes->get('bank/detail/(:num)', 'BankController::detail/$1');
+   
+   // admin user
+   $routes->get('user', 'UserController::index');
+   $routes->get('add-user', 'UserController::create');
+   $routes->post('add-user', 'UserController::store');
+   $routes->get('edit-user/(:num)', 'UserController::edit/$1');
+   $routes->post('edit-user/(:num)', 'UserController::update/$1');
+   $routes->post('user/delete', 'UserController::delete');
+   $routes->get('user/detail/(:num)', 'UserController::detail/$1');
 
 });
 

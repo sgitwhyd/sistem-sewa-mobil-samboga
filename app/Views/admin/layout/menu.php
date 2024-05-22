@@ -31,6 +31,12 @@
                 <div data-i18n="Armada">Armada</div>
               </a>
             </li>           
+            <li class="menu-item">
+              <a href="<?= base_url('admin/bank'); ?>" class="menu-link">
+                <i class='menu-icon tf-icons bx bxs-credit-card'></i>
+                <div data-i18n="Armada">Bank Account</div>
+              </a>
+            </li>           
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Transaksi</span>
             </li>
@@ -45,7 +51,7 @@
               <span class="menu-header-text">Management</span>
             </li>
             <li class="menu-item">
-              <a href="#" class="menu-link">
+              <a href="<?= base_url('admin/user'); ?>" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-user"></i>
                 <div data-i18n="Penyewaan">Users</div>
               </a>
