@@ -1,3 +1,5 @@
 # Ignore spesific folder named and all its contents
-images/
+vehicles/
 users/
+transactions/
+

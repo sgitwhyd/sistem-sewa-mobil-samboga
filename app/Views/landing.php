@@ -7,7 +7,7 @@
 </head>
 <body>
     <center>
-      <h1>Wellcome to Landing Page</h1>
+      <h1>Welcome to Landing Page</h1>
         <h3>Landing Page for Unauthorized</h3>
         <p>You don't have a login session to access all pages.</p>
         <a href="<?= base_url('/login');?>">Login to access autorized</a>

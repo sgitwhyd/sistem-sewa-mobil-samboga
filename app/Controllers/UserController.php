@@ -153,11 +153,13 @@ class UserController extends BaseController
         // handle image request
         $image = $this->request->getFile('ktp_image');
         if ($image->getError() == 4) {
-            $post_data['ktp_image'] = 'default.jpg';
+            $post_data['ktp_image'] = $user_old['ktp_image'];
         } else {
             // hapus file lama
-            if (file_exists(WRITEPATH . 'users/' . $user_old['ktp_image'])) {
-                unlink('images/'. $armada['image']);
+            if ($user_old['ktp_image'] != "default.jpg") {
+                if (file_exists(WRITEPATH . 'users/' . $user_old['ktp_image'])) {
+                    unlink('images/'. $armada['image']);
+                }
             }
             $timestamp = time();
             $randomString = bin2hex(random_bytes(6)); // Generate random string
