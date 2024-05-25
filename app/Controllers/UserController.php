@@ -45,14 +45,14 @@ class UserController extends BaseController
                 ]
             ],
             'email'    => [
-                'rules' =>'required|valid_email',
+                'rules' => 'required|valid_email',
                 'errors' => [
                     'required'    => 'Email tidak boleh kosong!',
                     'valid_email' => 'Email yang dimasukan harus valid.'
                 ]
             ],
             'password' => [
-                'rules' =>'required|min_length[8]',
+                'rules' => 'required|min_length[8]',
                 'errors' => [
                     'required'    => 'Password tidak boleh kosong!',
                     'min_length'  => 'Password minimal {param} karakter yang valid.'
@@ -80,7 +80,7 @@ class UserController extends BaseController
             $timestamp = time();
             $randomString = bin2hex(random_bytes(6)); // Generate random string
             $extension = $image->getClientExtension();
-            $newName = $timestamp. '_'. $randomString. '.'. $extension;
+            $newName = $timestamp . '_' . $randomString . '.' . $extension;
             $image->move('users', $newName);
             $post_data['ktp_image'] = $newName;
         }
@@ -110,7 +110,7 @@ class UserController extends BaseController
         $user_old = $userModel->find($this->request->getPost('id'));
         // pengecekan apakah aramada ditemukan (jika diperlukan)
         // 
-        
+
         // define validator
         $validation = \Config\Services::validation();
 
@@ -128,13 +128,13 @@ class UserController extends BaseController
                 ]
             ],
             'email'    => [
-                'rules' =>'required|valid_email',
+                'rules' => 'required|valid_email',
                 'errors' => [
                     'required'    => 'Email tidak boleh kosong!',
                     'valid_email' => 'Email yang dimasukan harus valid.'
                 ]
             ],
-           
+
         ];
 
         $validation->setRules($rules);
@@ -144,7 +144,7 @@ class UserController extends BaseController
         }
         $post_data = $this->request->getPost();
         // jika password diganti
-        if($post_data['password'] != "") {
+        if ($post_data['password'] != "") {
             $post_data['password'] = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
         } else {
             $post_data['password'] = $user_old['password'];
@@ -157,12 +157,12 @@ class UserController extends BaseController
         } else {
             // hapus file lama
             if (file_exists(WRITEPATH . 'users/' . $user_old['ktp_image'])) {
-                unlink('images/'. $armada['image']);
+                unlink('images/' . $user_old['image']);
             }
             $timestamp = time();
             $randomString = bin2hex(random_bytes(6)); // Generate random string
             $extension = $image->getClientExtension();
-            $newName = $timestamp. '_'. $randomString. '.'. $extension;
+            $newName = $timestamp . '_' . $randomString . '.' . $extension;
             $image->move('users', $newName);
             $post_data['ktp_image'] = $newName;
         }
@@ -189,7 +189,4 @@ class UserController extends BaseController
 
         return redirect()->to('admin/user')->with('success', 'User berhasil dihapus.');
     }
-
 }
-
-
