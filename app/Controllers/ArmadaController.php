@@ -125,14 +125,16 @@ class ArmadaController extends BaseController
             $post_data['image'] = $armada['image'];
         } else {
             // hapus file lama
-            if (file_exists(WRITEPATH . 'images/' . $armada['image'])) {
-                unlink('images/' . $armada['image']);
+            if ($armada['image'] != "default.jpg") {
+                if (file_exists(WRITEPATH . 'vehicles/' . $armada['image'])) {
+                    unlink('vehicles/'. $armada['image']);
+                }
             }
             $timestamp = time();
             $randomString = bin2hex(random_bytes(6)); // Generate random string
             $extension = $image->getClientExtension();
-            $newName = $timestamp . '_' . $randomString . '.' . $extension;
-            $image->move('images', $newName);
+            $newName = $timestamp. '_'. $randomString. '.'. $extension;
+            $image->move('vehicles', $newName);
             $post_data['image'] = $newName;
         }
 
