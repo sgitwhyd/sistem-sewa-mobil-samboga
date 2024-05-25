@@ -59,12 +59,12 @@ $routes->group('admin', ['filter' => ['auth','authorized:manage_admin']], functi
    $routes->get('user/detail/(:num)', 'UserController::detail/$1');
 
    // admin transaction
-   $routes->get('transaction', 'TransactionController::index');
-   $routes->get('add-transaction', 'TransactionController::create');
-   $routes->post('add-transaction', 'TransactionController::store');
-   $routes->get('edit-transaction/(:num)', 'TransactionController::edit/$1');
-   $routes->post('edit-transaction/(:num)', 'TransactionController::update/$1');
-   $routes->post('transaction/delete', 'TransactionController::destroy');
-   $routes->get('transaction/detail/(:num)', 'TransactionController::detail/$1');
+   $routes->get('transaksi', 'TransactionController::index');
+   $routes->get('transaksi/add-transaksi', 'TransactionController::create');
+   $routes->post('add-transaksi', 'TransactionController::store');
+   $routes->get('transaksi/edit-transaksi/(:num)', 'TransactionController::edit/$1');
+   $routes->post('edit-transaksi/(:num)', 'TransactionController::update/$1');
+   $routes->post('transaksi/delete', 'TransactionController::destroy');
+   $routes->get('transaksi/detail/(:num)', 'TransactionController::detail/$1');
 
 });

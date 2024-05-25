@@ -12,7 +12,7 @@
   </div>
     <div class="menu-inner-shadow"></div>
     <ul class="menu-inner py-1">
-      <li class="menu-item active">
+      <li class="menu-item">
         <a href="<?= base_url('/'); ?>" class="menu-link">
         <i class="menu-icon tf-icons bx bx-home-circle"></i>
           <div data-i18n="Dashboards">Dashboard</div>
@@ -37,9 +37,9 @@
         <span class="menu-header-text">Transaksi</span>
       </li>
       <li class="menu-item">
-        <a href="<?= base_url('admin/transaction'); ?>" class="menu-link">
+        <a href="<?= base_url('admin/transaksi'); ?>" class="menu-link">
           <i class="menu-icon tf-icons bx bx-taxi"></i>
-          <div data-i18n="Penyewaan">Penyewaan</div>
+          <div data-i18n="Transaksi">Transaksi</div>
         </a>
       </li>
       <li class="menu-header small text-uppercase">
