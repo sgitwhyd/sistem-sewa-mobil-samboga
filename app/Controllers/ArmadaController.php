@@ -91,7 +91,7 @@ class ArmadaController extends BaseController
     {
         $Vehicles = new Vehicles();
         $armada = $Vehicles->find($this->request->getPost('id'));
-        if(!$armada) return redirect()->back()->withInput()->with('errors', 'Armada tidak ditemukan!');
+        if (!$armada) return redirect()->back()->withInput()->with('errors', 'Armada tidak ditemukan!');
         // define validator
         $validation = \Config\Services::validation();
 
@@ -116,7 +116,7 @@ class ArmadaController extends BaseController
         if (!$validation->withRequest($this->request)->run()) {
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
-       
+
         $post_data = $this->request->getPost();
 
         // handle image request
@@ -126,12 +126,12 @@ class ArmadaController extends BaseController
         } else {
             // hapus file lama
             if (file_exists(WRITEPATH . 'images/' . $armada['image'])) {
-                unlink('images/'. $armada['image']);
+                unlink('images/' . $armada['image']);
             }
             $timestamp = time();
             $randomString = bin2hex(random_bytes(6)); // Generate random string
             $extension = $image->getClientExtension();
-            $newName = $timestamp. '_'. $randomString. '.'. $extension;
+            $newName = $timestamp . '_' . $randomString . '.' . $extension;
             $image->move('images', $newName);
             $post_data['image'] = $newName;
         }
@@ -161,6 +161,10 @@ class ArmadaController extends BaseController
 
     public function showCarList()
     {
-        return view('show-list-car');
+        $vehicles = new Vehicles();
+        $armadas = $vehicles->findAll();
+        return view('show-list-car', [
+            'armadas' => $armadas
+        ]);
     }
 }
