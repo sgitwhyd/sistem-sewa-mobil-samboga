@@ -12,10 +12,10 @@
 
 
 ### task
-- preview image armada (add,edit)
-- preview image user (add,edit,profile)
-- class active menu
-- tampilan list kendaraan (user)
+- preview image armada (add,edit) done
+- preview image user (add,edit,profile) done
+- class active menu done
+- tampilan list kendaraan (user) done
 
 
 ### database
