@@ -35,7 +35,7 @@
                 </div>
               <?php endif ?>
               <div class="mb-3">
-                <a href="<?= base_url('admin/add-bank'); ?>" class="btn btn-primary"><i class='bx bx-plus me-1'></i> Tambah</a>
+                <a href="<?= base_url('admin/bank/add-bank'); ?>" class="btn btn-primary"><i class='bx bx-plus me-1'></i> Tambah</a>
               </div>
               <div class="card mb-4">
                 <div class="card-body">
@@ -64,7 +64,7 @@
                               </button>
                               <div class="dropdown-menu">
                                 <button type="button" class="dropdown-item view-detail" data-id="<?= $value['id']; ?>"><i class='bx bxs-file-find me-1' ></i> View</button>
-                                <a class="dropdown-item" href="<?= base_url('admin/edit-bank/'.$value['id']); ?>"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                <a class="dropdown-item" href="<?= base_url('admin/bank/edit-bank/'.$value['id']); ?>"><i class="bx bx-edit-alt me-1"></i> Edit</a>
                                 <form action="<?= base_url('admin/bank/delete') ?>" method="POST" style="display:inline;">
                                   <input type="hidden" name="id" value="<?= $value['id']; ?>">
                                   <button type="submit" class="dropdown-item" onclick="return confirm('Are you sure you want to delete this item?');"><i class="bx bx-trash me-1"></i>Delete</button>
