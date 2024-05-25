@@ -16,10 +16,11 @@
 
           <ul class="menu-inner py-1">
             <!-- Dashboards -->
-            <li class="menu-item active">
+            <li class="menu-item">
               <a href="<?= base_url('/'); ?>" class="menu-link">
               <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Dashboards">Dashboard</div>
+                <div data-i18n="Dashboards">Dashboard 
+                </div>
               </a>
             </li>
             <li class="menu-header small text-uppercase">
@@ -34,7 +35,7 @@
             <li class="menu-item">
               <a href="<?= base_url('admin/bank'); ?>" class="menu-link">
                 <i class='menu-icon tf-icons bx bxs-credit-card'></i>
-                <div data-i18n="Armada">Bank Account</div>
+                <div data-i18n="Armada">Bank</div>
               </a>
             </li>           
             <li class="menu-header small text-uppercase">
@@ -53,7 +54,7 @@
             <li class="menu-item">
               <a href="<?= base_url('admin/user'); ?>" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-user"></i>
-                <div data-i18n="Penyewaan">Users</div>
+                <div data-i18n="Penyewaan">User</div>
               </a>
             </li>
           </ul>
