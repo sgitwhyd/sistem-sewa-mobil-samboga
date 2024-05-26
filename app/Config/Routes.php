@@ -63,7 +63,7 @@ $routes->group('admin', ['filter' => ['auth','authorized:manage_admin']], functi
    $routes->get('transaksi/add-transaksi', 'TransactionController::create');
    $routes->post('add-transaksi', 'TransactionController::store');
    $routes->get('transaksi/edit-transaksi/(:num)', 'TransactionController::edit/$1');
-   $routes->post('edit-transaksi/(:num)', 'TransactionController::update/$1');
+   $routes->post('transaksi/edit-transaksi/(:num)', 'TransactionController::update/$1');
    $routes->post('transaksi/delete', 'TransactionController::destroy');
    $routes->get('transaksi/detail/(:num)', 'TransactionController::detail/$1');
 

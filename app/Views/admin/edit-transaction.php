@@ -1,12 +1,11 @@
 <?= $this->extend('admin/layout/main'); ?>
 
 <?= $this->section('title'); ?>
-<title>Edit Transaction - ADMIN DASHBOARD</title>
+<title>Konfirmasi Transaksi - ADMIN DASHBOARD</title>
 <?= $this->endSection(); ?>
 
 <?= $this->section('link'); ?>
-<!-- datatable -->
-<link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.bootstrap5.css">
+<!-- link library -->
 <?= $this->endSection(); ?>
 
 <?= $this->section('content'); ?>
@@ -28,15 +27,15 @@
         <div class="card mb-4">
           <div class="card-header row">
             <div class="col-md-12 mb-3">
-              <a href="<?= base_url('admin/transaction');?>" class="btn btn-secondary"><i class='bx bx-arrow-back'></i></a>
+              <a href="<?= base_url('admin/transaksi');?>" class="btn btn-secondary"><i class='bx bx-arrow-back'></i></a>
             </div>
-            <h5>Edit Transaction</h5>
+            <h5>Konfirmasi Transaksi</h5>
           </div>
           <div class="card-body">
             <!-- pelanggan -->
             <div class="mb-3">
               <label for="customer" class="form-label">Pelanggan</label>
-              <select class="form-select" id="customer" name="user_id" aria-label="select customer">
+              <select class="form-select" id="customer" name="user_id" aria-label="select customer" disabled>
                 <option selected="">pilih armada</option>
                <?php for ($i=0; $i < count($user) ; $i++) : ?>
                 <option value="<?= $user[$i]['id']; ?>"><?= $user[$i]['first_name']." ".$user[$i]['last_name']; ?></option>
@@ -46,7 +45,7 @@
             <!-- armada -->
             <div class="mb-3">
               <label for="armada" class="form-label">Armada</label>
-              <select class="form-select" id="armada" name="vehicle_id" aria-label="select armada">
+              <select class="form-select" id="armada" name="vehicle_id" aria-label="select armada" disabled>
                 <option selected="">pilih armada</option>
                 <?php for ($i=0; $i < count($vehicle) ; $i++) : ?>
                 <option value="<?= $vehicle[$i]['id']; ?>"><?= $vehicle[$i]['name']; ?></option>
@@ -58,11 +57,11 @@
               <div class="row">
                 <div class="col-md-6 mb-3">
                   <label for="date_pickup" class="form-label">Tanggal pickup</label>
-                  <input class="form-control" type="date" id="date_pickup" name="date_pickup">
+                  <input class="form-control" type="date" id="date_pickup" name="date_pickup" readonly>
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="time_pickup" class="form-label">Time pickup</label>
-                  <input class="form-control" type="time" id="time_pickup" name="time_pickup">
+                  <input class="form-control" type="time" id="time_pickup" name="time_pickup" readonly>
                 </div>
               </div>
             </div>
@@ -71,26 +70,40 @@
               <div class="row">
                 <div class="col-md-6 mb-3">
                   <label for="date_dropoff" class="form-label">Tanggal dropoff</label>
-                  <input class="form-control" type="date" id="date_dropoff" name="date_dropoff">
+                  <input class="form-control" type="date" id="date_dropoff" name="date_dropoff" readonly>
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="time_dropoff" class="form-label">Time dropoff</label>
-                  <input class="form-control" type="time" id="time_dropoff" name="time_dropoff">
+                  <input class="form-control" type="time" id="time_dropoff" name="time_dropoff" readonly>
                 </div>
               </div>
             </div>
             <div class="mb-3">
               <label for="pickup_address" class="form-label">Pickup Address</label>
-              <textarea class="form-control" name="pickup_address" id="pickup_address" rows="3"></textarea>
+              <textarea class="form-control" name="pickup_address" id="pickup_address" rows="3" readonly></textarea>
             </div>
             <div class="mb-3">
               <label for="subtotal" class="form-label">Total Payment</label>
               <input type="text" class="form-control-plaintext" id="subtotal" name="total" value="Rp. 0" readonly>
             </div>
             <!-- preview image here -->
-            <div class="mb-3">
+            <div class=" card mb-3">
+              <label for="payment_image" class="form-label">Bukti Pembayaran</label>
+              <img width="100px" class="card-img-top" src="<?= base_url('transactions/').$transaction['payment_image']; ?>" alt="payment-image">
+            </div>
+            <!-- <div class="mb-3">
               <label for="payment_image" class="form-label">Bukti Pembayaran</label>
               <input class="form-control" type="file" id="payment_image" name="payment_image" >
+            </div> -->
+            <!-- approval confirmation -->
+            <div class="mb-3">
+              <label for="confirmation" class="form-label">Konfirmasi</label>
+              <select class="form-select" id="confirmation" name="status" aria-label="status transaksi">
+                <option value="PENDING">PENDING</option>
+                <option value="APPROVED">APPROVED</option>
+                <option value="REJECTED">REJECTED</option>
+                <option value="FINISHED">FINISHED</option>
+              </select>
             </div>
             <hr>
             <div class="col-md-6">
@@ -103,54 +116,16 @@
     </div>
 
 <?= $this->endSection(); ?>
-
+    
 <?= $this->section('script'); ?>
-<script>
-  function resetForm() {
-      document.getElementById('formTransaction').reset();
+  <script>
+    function resetForm() {
+      // document.getElementById('confirmation').reset();
+      $('#confirmation').val('<?= $transaction['status']; ?>').trigger('change');
   }
-  function durationCalculate(date_pickup, date_dropoff, time_pickup, time_dropoff) {
-    // handle date
-    const pickupObject = new Date(date_pickup);
-    const dropoffObject = new Date(date_dropoff);
-    
-    // handle time
-    const [pickupHours, pickupMinutes] = time_pickup.split(":").map(Number);
-    const [dropoffHours, dropoffMinutes] = time_dropoff.split(":").map(Number);
-    
-    // Create a new Date object for today
-    const pickTimeObject = new Date();
-    pickTimeObject.setHours(pickupHours);
-    pickTimeObject.setMinutes(pickupMinutes);
-    pickTimeObject.setSeconds(0); // optional: set seconds to 0
-    pickTimeObject.setMilliseconds(0); // optional: set milliseconds to 0
-    const dropTimeObject = new Date();
-    dropTimeObject.setHours(dropoffHours);
-    dropTimeObject.setMinutes(dropoffMinutes);
-    dropTimeObject.setSeconds(0); // optional: set seconds to 0
-    dropTimeObject.setMilliseconds(0); // optional: set milliseconds to 0
-    // Get the time in milliseconds since January 1, 1970, 00:00:00 UTC
-    const dateDuration = dropoffObject.getTime() - pickupObject.getTime();
-    if(dateDuration == 0) {
-      const timeDuration = dropTimeObject.getTime() - pickTimeObject.getTime();
-      return result = {  
-        'timeDuration': Math.ceil(timeDuration/3600000),
-        'dateDuration': dateDuration/86400000,
-      }     
-    } else {
-      const timeDuration = dropTimeObject.getTime() - pickTimeObject.getTime();
-      return result = {  
-        'timeDuration': Math.ceil(timeDuration/3600000),
-        'dateDuration': dateDuration/86400000,
-      }
-    }
-    // Calculate the difference
-      // 1 day = 86400000
-      // 1 hour = 3600000
-  }
-
+  
   $(document).ready(function () {
-
+    
     // editable value
     $('#customer').val('<?= $transaction['user_id']; ?>').trigger('change');
     $('#armada').val('<?= $transaction['vehicle_id']; ?>').trigger('change');
@@ -158,6 +133,7 @@
     $('#time_pickup').val('<?= $transaction['time_pickup']; ?>').trigger('change');
     $('#date_dropoff').val('<?= $transaction['date_dropoff']; ?>').trigger('change');
     $('#time_dropoff').val('<?= $transaction['time_dropoff']; ?>').trigger('change');
+    $('#confirmation').val('<?= $transaction['status']; ?>').trigger('change');
     $('#pickup_address').text('<?= $transaction['pickup_address']; ?>');
     $('#subtotal').val('Rp. <?= number_format($transaction['total']); ?>');
 

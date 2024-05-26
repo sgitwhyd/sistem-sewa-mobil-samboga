@@ -35,7 +35,7 @@
   </div>
 <?php endif ?>
 <div class="mb-3">
-  <a href="<?= base_url('admin/transaksi/add-transaksi'); ?>" class="btn btn-primary"><i class='bx bx-plus me-1'></i> Tambah</a>
+  <!-- <a href="#" class="btn btn-primary"><i class='bx bx-plus me-1'></i> Tambah</a> -->
 </div>
 <div class="card mb-4">
   <div class="card-body">
@@ -44,9 +44,10 @@
       <thead>
         <tr>
           <th width="5%">No.</th>
-          <th width="25%">Nama</th>
-          <th width="25%">Armada</th>
+          <th width="20%">Nama</th>
+          <th width="20%">Armada</th>
           <th width="15%">Subtotal</th>
+          <th width="10%">Status</th>
           <th width="25%">Payment</th>
           <th width="5%">Actions</th>
         </tr>
@@ -58,6 +59,22 @@
             <td><?= $value['first_name'] . " " . $value['last_name']; ?></td>
             <td><?= $value['vehicle_name']; ?></td>
             <td>Rp. <?= number_format($value['total']); ?></td>
+            <td>
+              <?php switch ($value['status']) {
+                case 'FINISHED':
+                  echo "<span class='badge bg-label-primary'>". $value['status'] . "</span>";
+                  break;
+                case 'APPROVED':
+                  echo "<span class='badge bg-label-success'>". $value['status'] . "</span>";
+                  break;
+                case 'REJECTED':
+                  echo "<span class='badge bg-label-danger'>". $value['status'] . "</span>";
+                  break;
+                default:
+                  echo "<span class='badge bg-label-warning'>". $value['status'] . "</span>";
+                  break;
+              } ?>
+            </td>
             <td><img width="200px" src="<?= base_url('transactions/') . $value['payment_image']; ?>" alt="payment-image"></td>
             <td>
               <div class="dropdown">
@@ -66,7 +83,7 @@
                 </button>
                 <div class="dropdown-menu">
                   <button type="button" class="dropdown-item view-detail" data-id="<?= $value['id']; ?>"><i class='bx bxs-file-find me-1'></i> View</button>
-                  <a class="dropdown-item" href="<?= base_url('admin/transaksi/edit-transaksi/' . $value['id']); ?>"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                  <a class="dropdown-item" href="<?= base_url('admin/transaksi/edit-transaksi/' . $value['id']); ?>"><i class="bx bx-edit-alt me-1"></i> Konfirmasi</a>
                   <form action="<?= base_url('admin/transaksi/delete') ?>" method="POST" style="display:inline;">
                     <input type="hidden" name="id" value="<?= $value['id']; ?>">
                     <button type="submit" class="dropdown-item" onclick="return confirm('Are you sure you want to delete this item?');"><i class="bx bx-trash me-1"></i>Delete</button>
@@ -100,7 +117,7 @@
         maximumFractionDigits: 0
       });
       $.ajax({
-        url: "<?= base_url('admin/transaction/detail/'); ?>" + itemId,
+        url: "<?= base_url('admin/transaksi/detail/'); ?>" + itemId,
         type: 'GET',
         success: function(data) {
           $('#detailTransaction').html('<dl class="row mt-2">\
@@ -112,6 +129,8 @@
                     <dd class="col-sm-9">' + currency.format(data['total']) + '</dd>\
                     <dt class="col-sm-3">Payment Info</dt>\
                     <dd class="col-sm-9"><img width="200px" src="<?= base_url('transactions/') ?>' + data['payment_image'] + '" alt="payment-image"></dd>\
+                    <dt class="col-sm-3">Status</dt>\
+                    <dd class="col-sm-9">'+ data['status']+'</dd>\
                     </dl>');
           $('#viewTransaction').modal('show');
         }

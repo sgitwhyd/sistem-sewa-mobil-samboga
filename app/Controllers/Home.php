@@ -6,7 +6,15 @@ class Home extends BaseController
 {
     public function index()
     {
-        return view('landing');
+        // return view('landing');
+        if(session()->isLogin){
+            if(session('user')['role'] == 'ADMIN'){
+                return redirect()->to('admin/dashboard');
+            }else{
+                return redirect()->to('user/dashboard');
+            }
+        }
+        return redirect()->to('/login');
     }
 
     public function error()
