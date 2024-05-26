@@ -43,25 +43,25 @@ $routes->group('admin', ['filter' => ['auth','authorized:manage_admin']], functi
    // admin bank account
    $routes->get('bank', 'BankController::index');
    $routes->get('bank/add-bank', 'BankController::create');
-   $routes->post('add-bank', 'BankController::store');
+   $routes->post('bank/add-bank', 'BankController::store');
    $routes->get('bank/edit-bank/(:num)', 'BankController::edit/$1');
-   $routes->post('edit-bank/(:num)', 'BankController::update/$1');
+   $routes->post('bank/edit-bank/(:num)', 'BankController::update/$1');
    $routes->post('bank/delete', 'BankController::delete');
    $routes->get('bank/detail/(:num)', 'BankController::detail/$1');
    
    // admin user
    $routes->get('user', 'UserController::index');
    $routes->get('user/add-user', 'UserController::create');
-   $routes->post('add-user', 'UserController::store');
+   $routes->post('user/add-user', 'UserController::store');
    $routes->get('user/edit-user/(:num)', 'UserController::edit/$1');
-   $routes->post('edit-user/(:num)', 'UserController::update/$1');
+   $routes->post('user/edit-user/(:num)', 'UserController::update/$1');
    $routes->post('user/delete', 'UserController::delete');
    $routes->get('user/detail/(:num)', 'UserController::detail/$1');
 
    // admin transaction
    $routes->get('transaksi', 'TransactionController::index');
    $routes->get('transaksi/add-transaksi', 'TransactionController::create');
-   $routes->post('add-transaksi', 'TransactionController::store');
+   $routes->post('transaksi/add-transaksi', 'TransactionController::store');
    $routes->get('transaksi/edit-transaksi/(:num)', 'TransactionController::edit/$1');
    $routes->post('transaksi/edit-transaksi/(:num)', 'TransactionController::update/$1');
    $routes->post('transaksi/delete', 'TransactionController::destroy');
