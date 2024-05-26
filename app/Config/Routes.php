@@ -34,9 +34,9 @@ $routes->group('admin', ['filter' => ['auth','authorized:manage_admin']], functi
    // admin armada
    $routes->get('armada', 'ArmadaController::index');
    $routes->get('armada/add-armada', 'ArmadaController::create');
-   $routes->post('add-armada', 'ArmadaController::store');
+   $routes->post('armada/add-armada', 'ArmadaController::store');
    $routes->get('armada/edit-armada/(:num)', 'ArmadaController::edit/$1');
-   $routes->post('edit-armada/(:num)', 'ArmadaController::update/$1');
+   $routes->post('armada/edit-armada/(:num)', 'ArmadaController::update/$1');
    $routes->post('armada/delete', 'ArmadaController::delete');
    $routes->get('armada/detail/(:num)', 'ArmadaController::detail/$1');
    
