@@ -15,15 +15,12 @@ $routes->group('user', ['filter' => ['auth','authorized:manage_user']], function
    $routes->get('car-list', 'ArmadaController::showCarList');
    // user profile
    $routes->get('profile', 'ProfileController::index');
-
+   $routes->post('profile', 'UserController::update');
+   
    // transaksi
    $routes->get('transaksi', 'TransactionController::index');
    $routes->get('transaksi/add-transaksi/(:num)', 'TransactionController::create/$1');
    $routes->post('transaksi/add-transaksi', 'TransactionController::store');
-   $routes->get('transaksi/edit-transaksi/(:num)', 'TransactionController::edit/$1');
-   $routes->post('transaksi/edit-transaksi/(:num)', 'TransactionController::update/$1');
-   $routes->post('transaksi/delete', 'TransactionController::delete');
-   $routes->get('transaksi/detail/(:num)', 'TransactionController::detail/$1');
 
 });
 
