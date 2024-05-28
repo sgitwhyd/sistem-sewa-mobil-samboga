@@ -134,9 +134,11 @@
     
     if (!(pickupDate >= currentTime)) {
       alert('Please select a valid date to pick up');
+      $('#date_pickup').val("");
       return false;
     } else if (!(dropoffDate >= pickupDate || date_dropoff == "")) {
       alert('Please select a valid date to drop off');
+      $('#date_dropoff').val("");
       return false;
     }
 
