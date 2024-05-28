@@ -29,7 +29,7 @@ class Home extends BaseController
 
     public function user()
     {
-        return view('dashboard');
+        return view('user/dashboard');
     }
     
 }

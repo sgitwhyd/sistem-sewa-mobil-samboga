@@ -152,7 +152,7 @@
                         Some quick example text to build on the card title and
                         make up the bulk of the card's content.
                       </p>
-                      <a href="javascript:void(0)" class="btn btn-primary">Pesan Sekarang</a>
+                      <a href="<?= base_url('user/transaksi/add-transaksi/').$armada['id']; ?>" class="btn btn-primary">Pesan Sekarang</a>
                     </div>
                   </div>
                 </div>

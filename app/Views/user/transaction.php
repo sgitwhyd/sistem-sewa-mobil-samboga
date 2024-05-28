@@ -1,7 +1,7 @@
-<?= $this->extend('admin/layout/main'); ?>
+<?= $this->extend('user/layout/main'); ?>
 
 <?= $this->section('title'); ?>
-<title>Transaction - ADMIN DASHBOARD</title>
+<title>Transaction - USER DASHBOARD</title>
 <?= $this->endSection(); ?>
 
 <?= $this->section('link'); ?>
@@ -83,11 +83,6 @@
                 </button>
                 <div class="dropdown-menu">
                   <button type="button" class="dropdown-item view-detail" data-id="<?= $value['id']; ?>"><i class='bx bxs-file-find me-1'></i> View</button>
-                  <a class="dropdown-item" href="<?= base_url('admin/transaksi/edit-transaksi/' . $value['id']); ?>"><i class="bx bx-edit-alt me-1"></i> Konfirmasi</a>
-                  <form action="<?= base_url('admin/transaksi/delete') ?>" method="POST" style="display:inline;">
-                    <input type="hidden" name="id" value="<?= $value['id']; ?>">
-                    <button type="submit" class="dropdown-item" onclick="return confirm('Are you sure you want to delete this item?');"><i class="bx bx-trash me-1"></i>Delete</button>
-                  </form>
                 </div>
               </div>
             </td>
@@ -117,7 +112,7 @@
         maximumFractionDigits: 0
       });
       $.ajax({
-        url: "<?= base_url('admin/transaksi/detail/'); ?>" + itemId,
+        url: "<?= base_url('user/transaksi/detail/'); ?>" + itemId,
         type: 'GET',
         success: function(data) {
           $('#detailTransaction').html('<dl class="row mt-2">\

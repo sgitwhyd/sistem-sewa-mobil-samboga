@@ -12,11 +12,7 @@
 
 
 ### task
-- preview image armada (add,edit) done
-- preview image user (add,edit,profile) done
-- class active menu done
-- tampilan list kendaraan (user) done
-
+- preview image transaksi
 
 ### database
 - 
@@ -27,6 +23,8 @@
 - armada CRUD
 - bank CRUD
 - user CRUD
+- transaksi (user)
+- konfirmasi transaksi (admin)
 
 
 

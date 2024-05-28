@@ -17,31 +17,56 @@ class TransactionController extends BaseController
     public function index()
     {
         $transModel = new Transactions();
-        // Join with the users table
-        $orders = $transModel->select('transactions.*, vehicles.name vehicle_name, vehicles.daily_price, users.first_name, users.last_name')
-                             ->join('vehicles', 'vehicles.id = transactions.vehicle_id')
-                             ->join('users', 'users.id = transactions.user_id')
-                             ->orderby('transactions.id', 'ASC')
-                             ->findAll();
-        $data = [
-            'transaction' => $orders
-        ];
-
-        return view('admin/transaction', $data);
+        if (session('user')['role'] == 'ADMIN') {
+            // Join with the users table
+            $orders = $transModel->select('transactions.*, vehicles.name vehicle_name, vehicles.daily_price, users.first_name, users.last_name')
+                                 ->join('vehicles', 'vehicles.id = transactions.vehicle_id')
+                                 ->join('users', 'users.id = transactions.user_id')
+                                 ->orderby('transactions.id', 'ASC')
+                                 ->findAll();
+            $data = [
+                'transaction' => $orders
+            ];
+            return view('admin/transaction', $data);
+        } else {
+            // Join with the users table
+            $user_id = session('user')['id'];
+            $orders = $transModel->select('transactions.*, vehicles.name vehicle_name, vehicles.daily_price, users.first_name, users.last_name')
+                            ->join('vehicles', 'vehicles.id = transactions.vehicle_id')
+                            ->join('users', 'users.id = transactions.user_id')
+                            ->where('transactions.user_id = '.$user_id)
+                            ->orderby('transactions.id', 'ASC')
+                            ->findAll();
+            $data = [
+                'transaction' => $orders
+            ];
+            return view('user/transaction', $data);
+        }
     }
 
-    public function create()
+    public function create($id_armada)
     {
-        $vehicleModel = new Vehicles();
-        $vehicle = $vehicleModel->findAll();
-        $userModel = new Users();
-        $user = $userModel->findAll();
-        $data = [
-            'vehicle' => $vehicle,
-            'user' => $user
-        ];
-
-        return view('admin/add-transaction', $data);
+        if (session('user')['role'] == "ADMIN") {
+            $vehicleModel = new Vehicles();
+            $vehicle = $vehicleModel->findAll();
+            $userModel = new Users();
+            $user = $userModel->findAll();
+            $data = [
+                'vehicle' => $vehicle,
+                'user' => $user
+            ];
+            return view('admin/add-transaction', $data);
+        } else if (session('user')['role'] == "USER") {
+            $vehicleModel = new Vehicles();
+            $vehicle = $vehicleModel->find($id_armada);
+            $userModel = new Users();
+            $user = $userModel->find(session('user')['id']);
+            $data = [
+                'vehicle' => $vehicle,
+                'user' => $user
+            ];
+            return view('user/add-transaction', $data);
+        }
     }
     public function store()
     {
@@ -85,8 +110,7 @@ class TransactionController extends BaseController
                 'errors' => [
                    'required' => 'Jam pengembalian tidak boleh kosong!'
                 ]
-            ],
-            'pickup_address' => [
+            ],            'pickup_address' => [
                 'rules' =>'required',
                 'errors' => [
                    'required' => 'Alamat pengambilan tidak boleh kosong!'
@@ -124,7 +148,11 @@ class TransactionController extends BaseController
         $model = new Transactions();
         $model->insert($post_data);
 
-        return redirect()->to(base_url('admin/transaction'))->with('success', 'Transaksi berhasil ditambahkan.');
+        if(session('user')['role'] == 'ADMIN') {
+            return redirect()->to(base_url('admin/transaksi'))->with('success', 'Transaksi berhasil ditambahkan.');
+        } else {
+            return redirect()->to(base_url('user/transaksi'))->with('success', 'Transaksi berhasil ditambahkan.');
+        }
     }
 
     public function edit($id)
@@ -153,46 +181,10 @@ class TransactionController extends BaseController
 
         // definisikan validation rules and custom messages
         $rules = [
-            'user_id' => [
+            'status' => [
                 'rules' =>'required',
                 'errors' => [
-                   'required' => 'User tidak boleh kosong!'
-                ]
-            ],
-            'vehicle_id' => [
-                'rules' =>'required',
-                'errors' => [
-                   'required' => 'Kendaraan tidak boleh kosong!'
-                ]
-            ],
-            'date_pickup' => [
-                'rules' =>'required',
-                'errors' => [
-                   'required' => 'Tanggal pengambilan tidak boleh kosong!'
-                ]
-            ],
-            'time_pickup' => [
-                'rules' =>'required',
-                'errors' => [
-                   'required' => 'Jam pengambilan tidak boleh kosong!'
-                ]
-            ],
-            'date_dropoff' => [
-                'rules' =>'required',
-                'errors' => [
-                   'required' => 'Tanggal pengembalian tidak boleh kosong!'
-                ]
-            ],
-            'time_dropoff' => [
-                'rules' =>'required',
-                'errors' => [
-                   'required' => 'Jam pengembalian tidak boleh kosong!'
-                ]
-            ],
-            'pickup_address' => [
-                'rules' =>'required',
-                'errors' => [
-                   'required' => 'Alamat pengambilan tidak boleh kosong!'
+                   'required' => 'Status Konfirmasi tidak boleh kosong!'
                 ]
             ],
         ];
@@ -204,37 +196,15 @@ class TransactionController extends BaseController
             // jika validasi gagal, kembalikan nilai form dengan error validasi
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
-        // handle total
-        $numberString = preg_replace("/[^0-9.,]/", "", $post_data['total']);
-        $numberString = str_replace(".", "", $numberString);
-        $numericValue = (int)$numberString;
-        $post_data['total'] = $numericValue;
-
-        // handle image request
-        $image = $this->request->getFile('payment_image');
-        if ($image->getError() == 4) {
-            $post_data['payment_image'] = $old_transaction['payment_image'];
-        } else {
-            // hapus payment_image old
-            if ($old_transaction['payment_image'] != 'default.jpg') {
-                if (file_exists(WRITEPATH . 'transactions/' . $old_transaction['payment_image'])) {
-                    unlink('transactios/'. $old_transaction['payment_image']);
-                }
-            }
-
-            $timestamp = time();
-            $randomString = bin2hex(random_bytes(6)); // Generate random string
-            $extension = $image->getClientExtension();
-            $newName = $timestamp . '_' . $randomString . '.' . $extension;
-            $image->move('transactions', $newName);
-            $post_data['payment_image'] = $newName;
-        }
-
+        $status = [
+            'status' => $post_data['status'],
+        ];
+    
         // Insert data ke database menggunakan model
         $model = new Transactions();
-        $model->update($old_transaction['id'], $post_data);
+        $model->update($old_transaction['id'], $status);
 
-        return redirect()->to(base_url('admin/transaction'))->with('success', 'Transaksi berhasil ditambahkan.');
+        return redirect()->to(base_url('admin/transaksi'))->with('success', 'Transaksi berhasil dikonfirmasi.');
 
     }
 
@@ -244,7 +214,7 @@ class TransactionController extends BaseController
         $id = $this->request->getPost('id');
         $transModel->delete($id);
 
-        return redirect()->to('admin/transaction')->with('success', 'transaksi berhasil dihapus.');
+        return redirect()->to('admin/transaksi')->with('success', 'transaksi berhasil dihapus.');
     }
 
     public function detail($id)

@@ -78,6 +78,51 @@ class BankController extends BaseController
         return view('admin/edit-bank', $data);
     }
 
+    public function update()
+    {
+        $post_data = $this->request->getPost();
+        $bankModel = new Banks();
+        $bank_old = $bankModel->find($post_data['id']);
+        // definisikan validation library
+        $validation = \Config\Services::validation();
+
+        // definisikan validation rules and custom messages
+        $rules = [
+            'bank_name' => [
+                'rules' =>'required',
+                'errors' => [
+                   'required' => 'Nama Bank tidak boleh kosong!'
+                ]
+            ],
+            'bank_number' => [
+                'rules' =>'required',
+                'errors' => [
+                   'required' => 'Nomor Rekening tidak boleh kosong!'
+                ]
+            ],
+            'bank_owner' => [
+                'rules' =>'required',
+                'errors' => [
+                   'required' => 'Nama Pemilik Rekening tidak boleh kosong!'
+                ]
+            ]
+        ];
+
+        // set validation rules
+        $validation->setRules($rules);
+
+        // run the validation
+        if (!$validation->withRequest($this->request)->run()) {
+            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+        } else {
+            // Insert data ke database menggunakan model
+            $model = new Banks();
+            $model->update($bank_old['id'], $post_data);
+
+            return redirect()->to(base_url('admin/bank'))->with('success', 'Bank berhasil diupdate.');
+        }
+    }
+
     public function detail($id)
     {
         $bankModel = new Banks();

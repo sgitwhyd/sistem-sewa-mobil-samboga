@@ -173,7 +173,11 @@ class UserController extends BaseController
         $model = new Users();
         $model->update($user_old['id'], $post_data);
 
-        return redirect()->to(base_url('admin/user'))->with('success', 'User berhasil diupdate.');
+        if (session('user')['role'] == 'ADMIN') {
+            return redirect()->to(base_url('admin/user'))->with('success', 'User berhasil diupdate.');
+        } else {
+            return redirect()->to(base_url('user/profile'))->with('success', 'User berhasil diupdate.');
+        }
     }
 
     public function detail($id)

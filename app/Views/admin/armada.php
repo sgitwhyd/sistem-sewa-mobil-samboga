@@ -55,7 +55,7 @@
         <?php foreach ($armada as $key => $value) : ?>
           <tr>
             <td style="text-align:center;"><?= $key + 1; ?>.</td>
-            <td><img width="200px" src="<?= base_url('images/') . $value['image']; ?>" alt="car-image"></td>
+            <td><img width="200px" src="<?= base_url('vehicles/') . $value['image']; ?>" alt="car-image"></td>
             <td><?= $value['name']; ?></td>
             <td><?= $value['description']; ?></td>
             <td>Rp. <?= number_format($value['daily_price']); ?></td>
@@ -107,7 +107,7 @@
                     <dt class="col-sm-3">Nama Armada</dt>\
                     <dd class="col-sm-9">' + data['name'] + '</dd>\
                     <dt class="col-sm-3">Gambar Armada</dt>\
-                    <dd class="col-sm-9"><img width="200px" src="<?= base_url('images/') ?>' + data['image'] + '" alt="car-image"></dd>\
+                    <dd class="col-sm-9"><img width="200px" src="<?= base_url('vehicles/') ?>' + data['image'] + '" alt="car-image"></dd>\
                     <dt class="col-sm-3">Deskripsi</dt>\
                     <dd class="col-sm-9">' + data['description'] + '</dd>\
                     <dt class="col-sm-3">Daily Price</dt>\

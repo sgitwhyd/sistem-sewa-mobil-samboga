@@ -15,6 +15,12 @@ $routes->group('user', ['filter' => ['auth','authorized:manage_user']], function
    $routes->get('car-list', 'ArmadaController::showCarList');
    // user profile
    $routes->get('profile', 'ProfileController::index');
+   $routes->post('profile', 'UserController::update');
+   
+   // transaksi
+   $routes->get('transaksi', 'TransactionController::index');
+   $routes->get('transaksi/add-transaksi/(:num)', 'TransactionController::create/$1');
+   $routes->post('transaksi/add-transaksi', 'TransactionController::store');
 
 });
 
@@ -34,36 +40,36 @@ $routes->group('admin', ['filter' => ['auth','authorized:manage_admin']], functi
    // admin armada
    $routes->get('armada', 'ArmadaController::index');
    $routes->get('armada/add-armada', 'ArmadaController::create');
-   $routes->post('add-armada', 'ArmadaController::store');
+   $routes->post('armada/add-armada', 'ArmadaController::store');
    $routes->get('armada/edit-armada/(:num)', 'ArmadaController::edit/$1');
-   $routes->post('edit-armada/(:num)', 'ArmadaController::update/$1');
+   $routes->post('armada/edit-armada/(:num)', 'ArmadaController::update/$1');
    $routes->post('armada/delete', 'ArmadaController::delete');
    $routes->get('armada/detail/(:num)', 'ArmadaController::detail/$1');
    
    // admin bank account
    $routes->get('bank', 'BankController::index');
    $routes->get('bank/add-bank', 'BankController::create');
-   $routes->post('add-bank', 'BankController::store');
+   $routes->post('bank/add-bank', 'BankController::store');
    $routes->get('bank/edit-bank/(:num)', 'BankController::edit/$1');
-   $routes->post('edit-bank/(:num)', 'BankController::update/$1');
+   $routes->post('bank/edit-bank/(:num)', 'BankController::update/$1');
    $routes->post('bank/delete', 'BankController::delete');
    $routes->get('bank/detail/(:num)', 'BankController::detail/$1');
    
    // admin user
    $routes->get('user', 'UserController::index');
    $routes->get('user/add-user', 'UserController::create');
-   $routes->post('add-user', 'UserController::store');
+   $routes->post('user/add-user', 'UserController::store');
    $routes->get('user/edit-user/(:num)', 'UserController::edit/$1');
-   $routes->post('edit-user/(:num)', 'UserController::update/$1');
+   $routes->post('user/edit-user/(:num)', 'UserController::update/$1');
    $routes->post('user/delete', 'UserController::delete');
    $routes->get('user/detail/(:num)', 'UserController::detail/$1');
 
    // admin transaction
    $routes->get('transaksi', 'TransactionController::index');
    $routes->get('transaksi/add-transaksi', 'TransactionController::create');
-   $routes->post('add-transaksi', 'TransactionController::store');
+   $routes->post('transaksi/add-transaksi', 'TransactionController::store');
    $routes->get('transaksi/edit-transaksi/(:num)', 'TransactionController::edit/$1');
-   $routes->post('edit-transaksi/(:num)', 'TransactionController::update/$1');
+   $routes->post('transaksi/edit-transaksi/(:num)', 'TransactionController::update/$1');
    $routes->post('transaksi/delete', 'TransactionController::destroy');
    $routes->get('transaksi/detail/(:num)', 'TransactionController::detail/$1');
 

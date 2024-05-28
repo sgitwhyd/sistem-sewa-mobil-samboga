@@ -53,7 +53,7 @@
         <div class="mb-3">
           <label for="image" class="form-label">Gambar Kendaraan</label>
           <input class="form-control" type="file" id="image" name="image">
-          <img src="https://picsum.photos/200" alt="image-preview" id="previewImage" class="mt-3">
+          <img src="<?= base_url('vehicles/').$armada['image']; ?>" alt="image-preview" id="previewImage" class="mt-3">
         </div>
         <hr>
         <div class="col-md-6">

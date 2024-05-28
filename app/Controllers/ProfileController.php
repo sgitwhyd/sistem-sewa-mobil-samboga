@@ -19,7 +19,7 @@ class ProfileController extends BaseController
         if(session('user')['role'] == 'ADMIN'){
             return view('admin/profile', $data);
         } else {
-            return view('profile', $data);
+            return view('user/profile', $data);
         }
     }
 }
