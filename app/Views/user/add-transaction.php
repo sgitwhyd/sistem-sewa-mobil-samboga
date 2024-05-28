@@ -106,6 +106,11 @@
     // handle date
     const pickupObject = new Date(date_pickup);
     const dropoffObject = new Date(date_dropoff);
+    const now = new Date();
+    now.setHours(07);
+    now.setMinutes(00);
+    now.setSeconds(0); // optional: set seconds to 0
+    now.setMilliseconds(0); // optional: set milliseconds to 0
 
     // handle time
     const [pickupHours, pickupMinutes] = time_pickup.split(":").map(Number);
@@ -123,6 +128,20 @@
     dropTimeObject.setSeconds(0); // optional: set seconds to 0
     dropTimeObject.setMilliseconds(0); // optional: set milliseconds to 0
     // Get the time in milliseconds since January 1, 1970, 00:00:00 UTC
+    const currentTime = now.getTime();
+    const pickupDate = pickupObject.getTime();
+    const dropoffDate = dropoffObject.getTime();
+    
+    if (!(pickupDate >= currentTime)) {
+      alert('Please select a valid date to pick up');
+      return false;
+    } else if (!(dropoffDate >= pickupDate || date_dropoff == "")) {
+      alert('Please select a valid date to drop off');
+      return false;
+    }
+
+
+
     const dateDuration = dropoffObject.getTime() - pickupObject.getTime();
     if (dateDuration == 0) {
       const timeDuration = dropTimeObject.getTime() - pickTimeObject.getTime();
