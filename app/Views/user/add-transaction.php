@@ -173,7 +173,6 @@
           subtotal = (daily_price / 24) * duration['timeDuration'];
           // subtotal = daily_price;
         }
-        console.log(daily_price/24);
         if (subtotal > 0) {
           $('#subtotal').val(currency.format(subtotal));
         } else {
