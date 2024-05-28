@@ -171,14 +171,16 @@
           subtotal = daily_price * duration['dateDuration'];
         } else {
           subtotal = (daily_price / 24) * duration['timeDuration'];
+          // subtotal = daily_price;
         }
+        console.log(daily_price/24);
         if (subtotal > 0) {
           $('#subtotal').val(currency.format(subtotal));
         } else {
           $('#subtotal').val(currency.format(0));
         }
       }
-    }, '#date_pickup, #date_dropoff, #time_pickup, #time_dropoff, #armada')
+    }, '#date_pickup, #date_dropoff, #time_pickup, #time_dropoff')
   })
 </script>
 <?= $this->endSection(); ?>
