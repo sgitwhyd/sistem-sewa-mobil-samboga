@@ -2,11 +2,19 @@
 
 namespace App\Controllers;
 
+use App\Models\Vehicles;
+
 class Home extends BaseController
 {
     public function index()
     {
-        return view('landing');
+        $vehicle = new Vehicles();
+        $vehicles = $vehicle->findAll();
+
+        
+        return view('landing', [
+            'vehicles' => $vehicles
+        ]);
     }
 
     public function error()
