@@ -21,7 +21,8 @@ $routes->group('user', ['filter' => ['auth','authorized:manage_user']], function
    $routes->get('transaksi', 'TransactionController::index');
    $routes->get('transaksi/add-transaksi/(:num)', 'TransactionController::create/$1');
    $routes->post('transaksi/add-transaksi', 'TransactionController::store');
-
+   $routes->get('transaksi/detail/(:num)', 'TransactionController::detail/$1');
+   
 });
 
 //  AuthController
