@@ -59,7 +59,17 @@
                                 <li class="active"><a href="index.html" class="nav-link">Home</a></li>
                                 <li><a href="#listings" class="nav-link">Rent</a></li>
                                 <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
-
+                                <li>
+                                    <?php if (session()->get('user')) : ?>
+                                        <a href="<?php if (session()->get('user')['role'] === 'USER') {
+                                                        echo base_url('user/dashboard');
+                                                    } else {
+                                                        echo base_url('admin/dashboard');
+                                                    } ?>" class="nav-link">Dashboard</a>
+                                    <?php else : ?>
+                                        <a href="/login" class="nav-link">Login</a>
+                                    <?php endif; ?>
+                                </li>
                             </ul>
                         </nav>
                     </div>
@@ -180,7 +190,7 @@
                                         <p>
                                             <?= $vehicle['description'] ?>
                                         </p>
-                                        <p><a href="#" class="btn btn-primary btn-sm">
+                                        <p><a href="<?= base_url('user/transaksi/add-transaksi') . '/' . $vehicle['id'] ?>" class="btn btn-primary btn-sm">
                                                 Pesan Sekarang
                                             </a></p>
                                     </div>
