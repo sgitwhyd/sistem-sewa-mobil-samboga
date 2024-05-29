@@ -118,6 +118,9 @@
       $.ajax({
         url: "<?= base_url('user/transaksi/detail/'); ?>" + itemId,
         type: 'GET',
+        contentType: {
+          'Content-Type': 'application/json',
+        },
         success: function(data) {
           $('#detailTransaction').html('<dl class="row mt-2">\
                     <dt class="col-sm-3">Nama Pelanggan</dt>\
