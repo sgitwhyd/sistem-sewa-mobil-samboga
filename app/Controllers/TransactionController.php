@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\Banks;
 use CodeIgniter\HTTP\ResponseInterface;
 
 use App\Models\Transactions;
@@ -20,10 +21,11 @@ class TransactionController extends BaseController
         if (session('user')['role'] == 'ADMIN') {
             // Join with the users table
             $orders = $transModel->select('transactions.*, vehicles.name vehicle_name, vehicles.daily_price, users.first_name, users.last_name')
-                                 ->join('vehicles', 'vehicles.id = transactions.vehicle_id')
-                                 ->join('users', 'users.id = transactions.user_id')
-                                 ->orderby('transactions.id', 'ASC')
-                                 ->findAll();
+                ->join('vehicles', 'vehicles.id = transactions.vehicle_id')
+                ->join('users', 'users.id = transactions.user_id')
+                ->join('banks', 'banks.id = transactions.bank_id')
+                ->orderby('transactions.id', 'ASC')
+                ->findAll();
             $data = [
                 'transaction' => $orders
             ];
@@ -32,20 +34,24 @@ class TransactionController extends BaseController
             // Join with the users table
             $user_id = session('user')['id'];
             $orders = $transModel->select('transactions.*, vehicles.name vehicle_name, vehicles.daily_price, users.first_name, users.last_name')
-                            ->join('vehicles', 'vehicles.id = transactions.vehicle_id')
-                            ->join('users', 'users.id = transactions.user_id')
-                            ->where('transactions.user_id = '.$user_id)
-                            ->orderby('transactions.id', 'ASC')
-                            ->findAll();
+                ->join('vehicles', 'vehicles.id = transactions.vehicle_id')
+                ->join('users', 'users.id = transactions.user_id')
+                ->join('banks', 'banks.id = transactions.bank_id')
+                ->where('transactions.user_id = ' . $user_id)
+                ->orderby('transactions.id', 'ASC')
+                ->findAll();
             $data = [
                 'transaction' => $orders
             ];
+            
             return view('user/transaction', $data);
         }
     }
 
     public function create($id_armada)
     {
+        $bankModel = new Banks();
+        $banks = $bankModel->findAll();
         if (session('user')['role'] == "ADMIN") {
             $vehicleModel = new Vehicles();
             $vehicle = $vehicleModel->findAll();
@@ -53,7 +59,8 @@ class TransactionController extends BaseController
             $user = $userModel->findAll();
             $data = [
                 'vehicle' => $vehicle,
-                'user' => $user
+                'user' => $user,
+                'banks' => $banks
             ];
             return view('admin/add-transaction', $data);
         } else if (session('user')['role'] == "USER") {
@@ -63,57 +70,58 @@ class TransactionController extends BaseController
             $user = $userModel->find(session('user')['id']);
             $data = [
                 'vehicle' => $vehicle,
-                'user' => $user
+                'user' => $user,
+                'banks' => $banks
             ];
             return view('user/add-transaction', $data);
         }
     }
     public function store()
     {
-        $post_data = $this->request->getPost();
+        $post_data = $this->request->getPost();;
         // definisikan validation library
         $validation = \Config\Services::validation();
         // definisikan validation rules and custom messages
         $rules = [
             'user_id' => [
-                'rules' =>'required',
+                'rules' => 'required',
                 'errors' => [
-                   'required' => 'User tidak boleh kosong!'
+                    'required' => 'User tidak boleh kosong!'
                 ]
             ],
             'vehicle_id' => [
-                'rules' =>'required',
+                'rules' => 'required',
                 'errors' => [
-                   'required' => 'Kendaraan tidak boleh kosong!'
+                    'required' => 'Kendaraan tidak boleh kosong!'
                 ]
             ],
             'date_pickup' => [
-                'rules' =>'required',
+                'rules' => 'required',
                 'errors' => [
-                   'required' => 'Tanggal pengambilan tidak boleh kosong!'
+                    'required' => 'Tanggal pengambilan tidak boleh kosong!'
                 ]
             ],
             'time_pickup' => [
-                'rules' =>'required',
+                'rules' => 'required',
                 'errors' => [
-                   'required' => 'Jam pengambilan tidak boleh kosong!'
+                    'required' => 'Jam pengambilan tidak boleh kosong!'
                 ]
             ],
             'date_dropoff' => [
-                'rules' =>'required',
+                'rules' => 'required',
                 'errors' => [
-                   'required' => 'Tanggal pengembalian tidak boleh kosong!'
+                    'required' => 'Tanggal pengembalian tidak boleh kosong!'
                 ]
             ],
             'time_dropoff' => [
-                'rules' =>'required',
+                'rules' => 'required',
                 'errors' => [
-                   'required' => 'Jam pengembalian tidak boleh kosong!'
+                    'required' => 'Jam pengembalian tidak boleh kosong!'
                 ]
             ],            'pickup_address' => [
-                'rules' =>'required',
+                'rules' => 'required',
                 'errors' => [
-                   'required' => 'Alamat pengambilan tidak boleh kosong!'
+                    'required' => 'Alamat pengambilan tidak boleh kosong!'
                 ]
             ]
         ];
@@ -148,7 +156,7 @@ class TransactionController extends BaseController
         $model = new Transactions();
         $model->insert($post_data);
 
-        if(session('user')['role'] == 'ADMIN') {
+        if (session('user')['role'] == 'ADMIN') {
             return redirect()->to(base_url('admin/transaksi'))->with('success', 'Transaksi berhasil ditambahkan.');
         } else {
             return redirect()->to(base_url('user/transaksi'))->with('success', 'Transaksi berhasil ditambahkan.');
@@ -163,15 +171,19 @@ class TransactionController extends BaseController
         $vehicle = $vehicleModel->findAll();
         $userModel = new Users();
         $user = $userModel->findAll();
+        $bankModel = new Banks();
+        $banks = $bankModel->where('id = ' . $transaction['bank_id'])->first();
         $data = [
             'vehicle' => $vehicle,
             'user' => $user,
             'transaction' => $transaction,
+            'banks' => $banks
         ];
+
         return view('admin/edit-transaction', $data);
     }
 
-    public function update() 
+    public function update()
     {
         $post_data = $this->request->getPost();
         $transModel = new Transactions();
@@ -182,9 +194,9 @@ class TransactionController extends BaseController
         // definisikan validation rules and custom messages
         $rules = [
             'status' => [
-                'rules' =>'required',
+                'rules' => 'required',
                 'errors' => [
-                   'required' => 'Status Konfirmasi tidak boleh kosong!'
+                    'required' => 'Status Konfirmasi tidak boleh kosong!'
                 ]
             ],
         ];
@@ -199,13 +211,12 @@ class TransactionController extends BaseController
         $status = [
             'status' => $post_data['status'],
         ];
-    
+
         // Insert data ke database menggunakan model
         $model = new Transactions();
         $model->update($old_transaction['id'], $status);
 
         return redirect()->to(base_url('admin/transaksi'))->with('success', 'Transaksi berhasil dikonfirmasi.');
-
     }
 
     public function destroy()
@@ -220,12 +231,14 @@ class TransactionController extends BaseController
     public function detail($id)
     {
         $transModel = new Transactions();
-        
+
         // Join with the users table
-        $orders = $transModel->select('transactions.*, vehicles.name vehicle_name, vehicles.daily_price, users.first_name, users.last_name')
-                             ->join('vehicles', 'vehicles.id = transactions.vehicle_id')
-                             ->join('users', 'users.id = transactions.user_id')
-                             ->find($id);
+        $orders = $transModel->select('transactions.*, vehicles.name vehicle_name, vehicles.daily_price, users.first_name, users.last_name, banks.bank_name')
+            ->join('vehicles', 'vehicles.id = transactions.vehicle_id')
+            ->join('users', 'users.id = transactions.user_id')
+            ->join('banks', 'banks.id = transactions.bank_id')
+            ->find($id);
+        
 
         return $this->respond($orders);
     }
