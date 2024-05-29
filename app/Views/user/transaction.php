@@ -122,10 +122,16 @@
                     <dd class="col-sm-9">' + data['vehicle_name'] + '</dd>\
                     <dt class="col-sm-3">Total Price</dt>\
                     <dd class="col-sm-9">' + currency.format(data['total']) + '</dd>\
-                    <dt class="col-sm-3">Payment Info</dt>\
-                    <dd class="col-sm-9"><img width="200px" src="<?= base_url('transactions/') ?>' + data['payment_image'] + '" alt="payment-image"></dd>\
                     <dt class="col-sm-3">Status</dt>\
                     <dd class="col-sm-9">'+ data['status']+'</dd>\
+                    <dt class="col-sm-3">Pickup Date</dt>\
+                    <dd class="col-sm-9">'+ data['date_pickup'] + ' ' + data['time_pickup'] +'</dd>\
+                    <dt class="col-sm-3">Drop Date</dt>\
+                    <dd class="col-sm-9">'+ data['date_dropoff'] + ' ' + data['time_dropoff'] +'</dd>\
+                    <dt class="col-sm-3">Pickup Address</dt>\
+                    <dd class="col-sm-9">'+ data['pickup_address']+'</dd>\
+                      <dt class="col-sm-3">Payment Info</dt>\
+                    <dd class="col-sm-9"><img width="200px" src="<?= base_url('transactions/') ?>' + data['payment_image'] + '" alt="payment-image"></dd>\
                     </dl>');
           $('#viewTransaction').modal('show');
         }
