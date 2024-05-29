@@ -168,9 +168,7 @@
                         </p>
                     </div>
                 </div>
-
-
-                <div class="row">
+                <!-- <div class="row">
                     <?php foreach ($vehicles as $key => $vehicle) : ?>
                         <div class="col-md-6 col-lg-4 mb-4">
                             <div class="listing d-block  align-items-stretch">
@@ -199,7 +197,12 @@
                             </div>
                         </div>
                     <?php endforeach; ?>
-                </div>
+                </div> -->
+ 
+                <!-- pagination vehicle -->
+                <div class="row" id="vehicle-list"></div>
+                <div class="custom-pagination" id="pagination-controls"></div>
+                
             </div>
         </div>
 
@@ -331,6 +334,7 @@
     <script src="landing/js/main.js"></script>
 
     <script>
+       
         $(document).ready(function() {
             $('.maps iframe').prop('width', '100%');
             $('.maps iframe').prop('loading', 'lazy');
@@ -339,6 +343,77 @@
                 $('#navbar-mobile').toggle();
             });
         });
+ 
+        // 
+        const vehicles = <?= json_encode($vehicles); ?>
+
+        const vehiclesPerPage = 6;
+        let currentPage = 1;
+
+        function displayVehicles() {
+            let currency = new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            });
+            const vehicleList = document.getElementById('vehicle-list');
+            vehicleList.innerHTML = '';
+
+            const start = (currentPage - 1) * vehiclesPerPage;
+            const end = start + vehiclesPerPage;
+            const paginatedVehicles = vehicles.slice(start, end);
+
+            paginatedVehicles.forEach(vehicle => {
+                const vehicleDiv = document.createElement('div');
+                vehicleDiv.className = 'col-md-6 col-lg-4 mb-4';
+                vehicleDiv.innerHTML = `
+                    <div class="listing d-block align-items-stretch">
+                        <div class="listing-img h-100 mr-4">
+                            <img src="${vehicle.image}" alt="Image" class="img-fluid">
+                        </div>
+                        <div class="listing-contents h-100">
+                            <h3><strong>${vehicle.name}</strong></h3>
+                            <div class="rent-price">
+                                <strong>${currency.format(vehicle.daily_price)}</strong><span class="mx-1">/</span>Hari
+                            </div>
+                            <div>
+                                <p>${vehicle.description}</p>
+                                <p><a href="user/transaksi/add-transaksi/${vehicle.id}" class="btn btn-primary btn-sm">Pesan Sekarang</a></p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                vehicleList.appendChild(vehicleDiv);
+            });
+
+            updatePaginationControls();
+        }
+
+        function updatePaginationControls() {
+            const paginationControls = document.getElementById('pagination-controls');
+            paginationControls.innerHTML = '';
+
+            const totalPages = Math.ceil(vehicles.length / vehiclesPerPage);
+
+            for (let i = 1; i <= totalPages; i++) {
+                const pageLink = document.createElement(i === currentPage ? 'span' : 'a');
+                pageLink.className = i === currentPage ? 'current-page' : '';
+                pageLink.textContent = i;
+                if (i !== currentPage) {
+                    pageLink.href = '#';
+                    pageLink.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        currentPage = i;
+                        displayVehicles();
+                    });
+                }
+                paginationControls.appendChild(pageLink);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', displayVehicles);
+
     </script>
 
 </body>
