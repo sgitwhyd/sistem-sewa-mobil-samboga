@@ -140,6 +140,11 @@
                     <dd class="col-sm-9"><img width="100px" src="<?= base_url('transactions/') ?>' + data['payment_image'] + '" alt="payment-image"></dd>\
                     </dl>');
           $('#viewTransaction').modal('show');
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          // Improved error handling
+          console.error('Error fetching transaction details:', textStatus, errorThrown);
+          alert('Failed to fetch transaction details. Please try again later.');
         }
       });
     });
