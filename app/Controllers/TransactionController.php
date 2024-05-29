@@ -233,7 +233,7 @@ class TransactionController extends BaseController
         $transModel = new Transactions();
 
         // Join with the users table
-        $orders = $transModel->select('transactions.*, vehicles.name vehicle_name, vehicles.daily_price, users.first_name, users.last_name, banks.bank_name')
+        $orders = $transModel->select('transactions.*, vehicles.name vehicle_name, vehicles.daily_price, users.first_name, users.last_name, banks.*')
             ->join('vehicles', 'vehicles.id = transactions.vehicle_id')
             ->join('users', 'users.id = transactions.user_id')
             ->join('banks', 'banks.id = transactions.bank_id')

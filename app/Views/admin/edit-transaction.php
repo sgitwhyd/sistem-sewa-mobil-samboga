@@ -88,7 +88,7 @@
         </div>
         <div class="mb-3">
           <label for="bank" class="form-label">Bank</label>
-         <input class="form-control" type="text" id="bank" name="bank" readonly>
+          <input class="form-control" type="text" id="bank" name="bank" readonly>
         </div>
         <!-- preview image here -->
         <div class="d-flex flex-column mb-3">
@@ -128,7 +128,7 @@
     $('#time_dropoff').val('<?= $transaction['time_dropoff']; ?>').trigger('change');
     $('#confirmation').val('<?= $transaction['status']; ?>').trigger('change');
     $('#pickup_address').text('<?= $transaction['pickup_address']; ?>');
-    $('#bank').val('<?= $banks['bank_name'] . '-' . $banks['bank_owner'] ?>');
+    $('#bank').val('<?=  $banks['bank_number'] . ' - ' . $banks['bank_name'] . ' - ' . $banks['bank_owner'] ?>');
     $('#subtotal').val('Rp. <?= number_format($transaction['total']); ?>');
 
 

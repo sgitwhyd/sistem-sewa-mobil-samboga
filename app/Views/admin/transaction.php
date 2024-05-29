@@ -75,7 +75,7 @@
                   break;
               } ?>
             </td>
-            <td><img width="200px" src="<?= base_url('transactions/') . $value['payment_image']; ?>" alt="payment-image"></td>
+            <td><img width="100px" src="<?= base_url('transactions/') . $value['payment_image']; ?>" alt="payment-image"></td>
             <td>
               <div class="dropdown">
                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">

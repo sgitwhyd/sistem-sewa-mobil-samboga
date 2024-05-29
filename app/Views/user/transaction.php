@@ -75,7 +75,7 @@
                   break;
               } ?>
             </td>
-            <td><img width="200px" src="<?= base_url('transactions/') . $value['payment_image']; ?>" alt="payment-image"></td>
+            <td><img width="100px" src="<?= base_url('transactions/') . $value['payment_image']; ?>" alt="payment-image"></td>
             <td>
               <div class="dropdown">
                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -131,9 +131,9 @@
                     <dt class="col-sm-3">Pickup Address</dt>\
                     <dd class="col-sm-9">'+ data['pickup_address']+'</dd>\
                     <dt class="col-sm-3">Bank</dt>\
-                    <dd class="col-sm-9">'+ data['bank_name']+'</dd>\
+                    <dd class="col-sm-9">'+ data['bank_number'] + ' - ' + data['bank_name'] + ' - ' + data['bank_owner'] +'</dd>\
                     <dt class="col-sm-3">Payment Info</dt>\
-                    <dd class="col-sm-9"><img width="200px" src="<?= base_url('transactions/') ?>' + data['payment_image'] + '" alt="payment-image"></dd>\
+                    <dd class="col-sm-9"><img width="100px" src="<?= base_url('transactions/') ?>' + data['payment_image'] + '" alt="payment-image"></dd>\
                     </dl>');
           $('#viewTransaction').modal('show');
         }

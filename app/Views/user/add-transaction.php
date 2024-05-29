@@ -87,7 +87,7 @@
               Select Bank
             </option>
             <?php foreach ($banks as $bank) : ?>
-              <option value="<?= $bank['id']; ?>"><?= $bank['bank_name']; ?></option>
+              <option value="<?= $bank['id']; ?>"><?= $bank['bank_number'] . ' - ' . $bank['bank_name'] . ' - ' . $bank['bank_owner'] ?></option>
             <?php endforeach; ?>
           </select>
         </div>
