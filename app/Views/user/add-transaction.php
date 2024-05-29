@@ -73,17 +73,18 @@
         </div>
         <div class="mb-3">
           <label for="pickup_address" class="form-label">Pickup Address</label>
-          <textarea class="form-control" name="pickup_address" id="pickup_address" rows="3"></textarea>
+          <textarea class="form-control" name="pickup_address" id="pickup_address" rows="3" required></textarea>
         </div>
         <div class="mb-3">
           <label for="subtotal" class="form-label">Total Payment</label>
-          <div class="day">Rp. <?= number_format($vehicle['daily_price'], 0,0) ?> * <span id="day">0</span> Hari</div>
+          <div class="day">Rp. <?= number_format($vehicle['daily_price'], 0, 0) ?> * <span id="day">0</span> Hari</div>
           <input type="text" class="form-control-plaintext" id="subtotal" name="total" value="Rp. 0" readonly>
         </div>
         <!-- preview image here -->
         <div class="mb-3">
           <label for="payment_image" class="form-label">Bukti Pembayaran</label>
           <input class="form-control" type="file" id="payment_image" name="payment_image" required>
+          <img src="" alt="" id="previewImage" class="d-none">
         </div>
         <hr>
         <div class="col-md-6">
@@ -99,15 +100,40 @@
 
 <?= $this->section('script'); ?>
 <script>
+  const imagePreview = document.getElementById('previewImage')
+
   function resetForm() {
     document.getElementById('formTransaction').reset();
+    imagePreview.classList.add('d-none');
+    document.getElementById('previewImage').setAttribute('src', '');
   }
+
+
+  document.getElementById('payment_image').addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+      imagePreview.classList.remove('d-none');
+      const reader = new FileReader();
+      reader.onload = function() {
+        const previewImage = document.getElementById('previewImage');
+        previewImage.setAttribute('src', reader.result);
+        previewImage.classList.add('mt-3');
+        previewImage.style.width = '200px';
+        previewImage.style.height = 'auto';
+      }
+      reader.readAsDataURL(file);
+    }
+  });
 
   function durationCalculate(date_pickup, date_dropoff, time_pickup, time_dropoff) {
     // handle date
     const pickupObject = new Date(date_pickup);
     const dropoffObject = new Date(date_dropoff);
-    const now = new Date();z
+    const now = new Date();
+    now.setHours(7);
+    now.setMinutes(0);
+    now.setSeconds(0); // optional: set seconds to 0
+    now.setMilliseconds(0); // optional: set milliseconds to 0
 
     // handle time
     const [pickupHours, pickupMinutes] = time_pickup.split(":").map(Number);
@@ -128,7 +154,7 @@
     const currentTime = now.getTime();
     const pickupDate = pickupObject.getTime();
     const dropoffDate = dropoffObject.getTime();
-    
+
     if (!(pickupDate >= currentTime)) {
       alert('Please select a valid date to pick up');
       $('#date_pickup').val("");
@@ -186,7 +212,6 @@
         let time_dropoff = $('#time_dropoff').val();
         let duration = durationCalculate(date_pickup, date_dropoff, time_pickup, time_dropoff);
         if (duration['dateDuration'] > 0) {
-          console.log(duration['dateDuration']);
           subtotal = daily_price * duration['dateDuration'];
         } else {
           subtotal = (daily_price / 24) * duration['timeDuration'];
