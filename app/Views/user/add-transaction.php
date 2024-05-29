@@ -80,6 +80,17 @@
           <div class="day">Rp. <?= number_format($vehicle['daily_price'], 0, 0) ?> * <span id="day">0</span> Hari</div>
           <input type="text" class="form-control-plaintext" id="subtotal" name="total" value="Rp. 0" readonly>
         </div>
+        <div class="mb-3">
+          <label for="bank" class="form-label">Bank</label>
+          <select class="form-select" id="bank" name="bank_id" aria-label="select bank">
+            <option value="" disabled selected>
+              Select Bank
+            </option>
+            <?php foreach ($banks as $bank) : ?>
+              <option value="<?= $bank['id']; ?>"><?= $bank['bank_name']; ?></option>
+            <?php endforeach; ?>
+          </select>
+        </div>
         <!-- preview image here -->
         <div class="mb-3">
           <label for="payment_image" class="form-label">Bukti Pembayaran</label>

@@ -130,7 +130,9 @@
                     <dd class="col-sm-9">'+ data['date_dropoff'] + ' ' + data['time_dropoff'] +'</dd>\
                     <dt class="col-sm-3">Pickup Address</dt>\
                     <dd class="col-sm-9">'+ data['pickup_address']+'</dd>\
-                      <dt class="col-sm-3">Payment Info</dt>\
+                    <dt class="col-sm-3">Bank</dt>\
+                    <dd class="col-sm-9">'+ data['bank_name']+'</dd>\
+                    <dt class="col-sm-3">Payment Info</dt>\
                     <dd class="col-sm-9"><img width="200px" src="<?= base_url('transactions/') ?>' + data['payment_image'] + '" alt="payment-image"></dd>\
                     </dl>');
           $('#viewTransaction').modal('show');
