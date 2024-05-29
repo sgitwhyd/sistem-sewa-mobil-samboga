@@ -62,7 +62,7 @@
                                 <li>
                                     <?php if (session()->get('user')) : ?>
                                         <a href="<?php if (session()->get('user')['role'] === 'USER') {
-                                                        echo base_url('user/dashboard');
+                                                        echo base_url('user/profile');
                                                     } else {
                                                         echo base_url('admin/dashboard');
                                                     } ?>" class="nav-link">Dashboard</a>
@@ -168,36 +168,6 @@
                         </p>
                     </div>
                 </div>
-                <!-- <div class="row">
-                    <?php foreach ($vehicles as $key => $vehicle) : ?>
-                        <div class="col-md-6 col-lg-4 mb-4">
-                            <div class="listing d-block  align-items-stretch">
-                                <div class="listing-img h-100 mr-4">
-                                    <img src="<?= $vehicle['image'] ?>" alt="Image" class="img-fluid">
-                                </div>
-                                <div class="listing-contents h-100">
-                                    <h3>
-                                        <strong><?= $vehicle['name'] ?></strong>
-                                    </h3>
-                                    <div class="rent-price">
-                                        <strong>
-                                            Rp <?= number_format($vehicle['daily_price']) ?>
-                                        </strong><span class="mx-1">/</span>Hari
-                                    </div>
-                                    <div>
-                                        <p>
-                                            <?= $vehicle['description'] ?>
-                                        </p>
-                                        <p><a href="<?= base_url('user/transaksi/add-transaksi') . '/' . $vehicle['id'] ?>" class="btn btn-primary btn-sm">
-                                                Pesan Sekarang
-                                            </a></p>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div> -->
  
                 <!-- pagination vehicle -->
                 <div class="row" id="vehicle-list"></div>
@@ -347,7 +317,7 @@
         // 
         const vehicles = <?= json_encode($vehicles); ?>
 
-        const vehiclesPerPage = 6;
+        const vehiclesPerPage = 3;
         let currentPage = 1;
 
         function displayVehicles() {

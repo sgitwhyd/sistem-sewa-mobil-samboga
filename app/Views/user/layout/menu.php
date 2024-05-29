@@ -1,6 +1,6 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="index.html" class="app-brand-link">
+            <a href="/" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                   width="25"
@@ -68,10 +68,10 @@
             <!-- Apps -->
             <li class="menu-item">
               <a
-                href="<?= base_url('user/dashboard'); ?>"
+                href="<?= base_url('user/profile'); ?>"
                 class="menu-link">
                 <i class='menu-icon tf-icons bx bxs-dashboard' ></i>
-                <div data-i18n="Dashboard">Dashboard</div>
+                <div data-i18n="Dashboard">Profile</div>
               </a>
             </li>
             <li class="menu-item">
