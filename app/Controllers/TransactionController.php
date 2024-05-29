@@ -23,7 +23,6 @@ class TransactionController extends BaseController
             $orders = $transModel->select('transactions.*, vehicles.name vehicle_name, vehicles.daily_price, users.first_name, users.last_name')
                 ->join('vehicles', 'vehicles.id = transactions.vehicle_id')
                 ->join('users', 'users.id = transactions.user_id')
-                ->join('banks', 'banks.id = transactions.bank_id')
                 ->orderby('transactions.id', 'ASC')
                 ->findAll();
             $data = [
@@ -36,10 +35,9 @@ class TransactionController extends BaseController
             $orders = $transModel->select('transactions.*, vehicles.name vehicle_name, vehicles.daily_price, users.first_name, users.last_name')
                 ->join('vehicles', 'vehicles.id = transactions.vehicle_id')
                 ->join('users', 'users.id = transactions.user_id')
-                ->join('banks', 'banks.id = transactions.bank_id')
-                ->where('transactions.user_id = ' . $user_id)
                 ->orderby('transactions.id', 'ASC')
                 ->findAll();
+
             $data = [
                 'transaction' => $orders
             ];
