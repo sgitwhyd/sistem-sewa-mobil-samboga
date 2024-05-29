@@ -50,11 +50,11 @@
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="date_pickup" class="form-label">Tanggal pickup</label>
-              <input class="form-control" type="date" id="date_pickup" name="date_pickup">
+              <input class="form-control" type="date" id="date_pickup" name="date_pickup" required>
             </div>
             <div class="col-md-6 mb-3">
               <label for="time_pickup" class="form-label">Time pickup</label>
-              <input class="form-control" type="time" id="time_pickup" name="time_pickup">
+              <input class="form-control" type="time" id="time_pickup" name="time_pickup" required>
             </div>
           </div>
         </div>
@@ -63,11 +63,11 @@
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="date_dropoff" class="form-label">Tanggal dropoff</label>
-              <input class="form-control" type="date" id="date_dropoff" name="date_dropoff">
+              <input class="form-control" type="date" id="date_dropoff" name="date_dropoff" required>
             </div>
             <div class="col-md-6 mb-3">
               <label for="time_dropoff" class="form-label">Time dropoff</label>
-              <input class="form-control" type="time" id="time_dropoff" name="time_dropoff">
+              <input class="form-control" type="time" id="time_dropoff" name="time_dropoff" required>
             </div>
           </div>
         </div>
@@ -77,6 +77,7 @@
         </div>
         <div class="mb-3">
           <label for="subtotal" class="form-label">Total Payment</label>
+          <div class="day">Rp. <?= number_format($vehicle['daily_price'], 0,0) ?> * <span id="day">0</span> Hari</div>
           <input type="text" class="form-control-plaintext" id="subtotal" name="total" value="Rp. 0" readonly>
         </div>
         <!-- preview image here -->
@@ -106,11 +107,7 @@
     // handle date
     const pickupObject = new Date(date_pickup);
     const dropoffObject = new Date(date_dropoff);
-    const now = new Date();
-    now.setHours(07);
-    now.setMinutes(00);
-    now.setSeconds(0); // optional: set seconds to 0
-    now.setMilliseconds(0); // optional: set milliseconds to 0
+    const now = new Date();z
 
     // handle time
     const [pickupHours, pickupMinutes] = time_pickup.split(":").map(Number);
@@ -189,12 +186,14 @@
         let time_dropoff = $('#time_dropoff').val();
         let duration = durationCalculate(date_pickup, date_dropoff, time_pickup, time_dropoff);
         if (duration['dateDuration'] > 0) {
+          console.log(duration['dateDuration']);
           subtotal = daily_price * duration['dateDuration'];
         } else {
           subtotal = (daily_price / 24) * duration['timeDuration'];
           // subtotal = daily_price;
         }
         if (subtotal > 0) {
+          $('#day').text(duration['dateDuration']);
           $('#subtotal').val(currency.format(subtotal));
         } else {
           $('#subtotal').val(currency.format(0));
