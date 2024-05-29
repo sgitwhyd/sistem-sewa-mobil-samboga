@@ -19,7 +19,7 @@ class BankController extends BaseController
         return view('admin/bank', $data);
     }
 
-    public function create() 
+    public function create()
     {
         return view('admin/add-bank');
     }
@@ -34,21 +34,21 @@ class BankController extends BaseController
         // definisikan validation rules and custom messages
         $rules = [
             'bank_name' => [
-                'rules' =>'required',
+                'rules' => 'required',
                 'errors' => [
-                   'required' => 'Nama Bank tidak boleh kosong!'
+                    'required' => 'Nama Bank tidak boleh kosong!'
                 ]
             ],
             'bank_number' => [
-                'rules' =>'required',
+                'rules' => 'required',
                 'errors' => [
-                   'required' => 'Nomor Rekening tidak boleh kosong!'
+                    'required' => 'Nomor Rekening tidak boleh kosong!'
                 ]
             ],
             'bank_owner' => [
-                'rules' =>'required',
+                'rules' => 'required',
                 'errors' => [
-                   'required' => 'Nama Pemilik Rekening tidak boleh kosong!'
+                    'required' => 'Nama Pemilik Rekening tidak boleh kosong!'
                 ]
             ]
         ];
@@ -75,7 +75,7 @@ class BankController extends BaseController
         $data = [
             'bank' => $bank,
         ];
-        return view('admin/edit-bank', $data);
+        return view('admin/bank/edit-bank', $data);
     }
 
     public function update()
@@ -89,21 +89,21 @@ class BankController extends BaseController
         // definisikan validation rules and custom messages
         $rules = [
             'bank_name' => [
-                'rules' =>'required',
+                'rules' => 'required',
                 'errors' => [
-                   'required' => 'Nama Bank tidak boleh kosong!'
+                    'required' => 'Nama Bank tidak boleh kosong!'
                 ]
             ],
             'bank_number' => [
-                'rules' =>'required',
+                'rules' => 'required',
                 'errors' => [
-                   'required' => 'Nomor Rekening tidak boleh kosong!'
+                    'required' => 'Nomor Rekening tidak boleh kosong!'
                 ]
             ],
             'bank_owner' => [
-                'rules' =>'required',
+                'rules' => 'required',
                 'errors' => [
-                   'required' => 'Nama Pemilik Rekening tidak boleh kosong!'
+                    'required' => 'Nama Pemilik Rekening tidak boleh kosong!'
                 ]
             ]
         ];
