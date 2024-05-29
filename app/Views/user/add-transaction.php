@@ -82,8 +82,8 @@
         </div>
         <div class="mb-3">
           <label for="bank" class="form-label">Bank</label>
-          <select class="form-select" id="bank" name="bank_id" aria-label="select bank">
-            <option value="" disabled selected>
+          <select class="form-select" id="bank" name="bank_id" aria-label="select bank" required>
+            <option value="" selected>
               Select Bank
             </option>
             <?php foreach ($banks as $bank) : ?>

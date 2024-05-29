@@ -103,6 +103,10 @@
   $(document).ready(function() {
     $('#tableTransaction').DataTable();
 
+    $('#viewTransaction').on('hidden.bs.modal', function () {
+      $('#detailTransaction').html('');
+    });
+
     $('#tableTransaction tbody').on('click', '.view-detail', function() {
       var itemId = $(this).data('id');
       let currency = new Intl.NumberFormat('id-ID', {
