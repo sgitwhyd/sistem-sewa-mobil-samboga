@@ -75,7 +75,7 @@ class BankController extends BaseController
         $data = [
             'bank' => $bank,
         ];
-        return view('admin/bank/edit-bank', $data);
+        return view('admin/edit-bank', $data);
     }
 
     public function update()
