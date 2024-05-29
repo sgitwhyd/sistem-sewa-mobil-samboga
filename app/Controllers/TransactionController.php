@@ -230,16 +230,24 @@ class TransactionController extends BaseController
 
     public function detail($id)
     {
-        $transModel = new Transactions();
+        try {
+            $model = new \App\Models\TransaksiModel();
+    // Join with the users table
+            $order = $transModel->select('transactions.*, vehicles.name vehicle_name, vehicles.daily_price, users.first_name, users.last_name, banks.*')
+                ->join('vehicles', 'vehicles.id = transactions.vehicle_id')
+                ->join('users', 'users.id = transactions.user_id')
+                ->join('banks', 'banks.id = transactions.bank_id')
+                ->find($id);
 
-        // Join with the users table
-        $orders = $transModel->select('transactions.*, vehicles.name vehicle_name, vehicles.daily_price, users.first_name, users.last_name, banks.*')
-            ->join('vehicles', 'vehicles.id = transactions.vehicle_id')
-            ->join('users', 'users.id = transactions.user_id')
-            ->join('banks', 'banks.id = transactions.bank_id')
-            ->find($id);
-        
+            if (!$order) {
+                return $this->response->setStatusCode(ResponseInterface::HTTP_NOT_FOUND)->setJSON(['error' => 'Transaction not found']);
+            }
 
-        return $this->respond($orders);
+            return $this->response->setStatusCode(ResponseInterface::HTTP_OK)->setJSON($data);
+        } catch (Exception $e) {
+            log_message('error', $e->getMessage());
+            return $this->response->setStatusCode(ResponseInterface::HTTP_INTERNAL_SERVER_ERROR)->setJSON(['error' => 'Internal Server Error']);
+        }
+        // return $this->respond($orders);
     }
 }
