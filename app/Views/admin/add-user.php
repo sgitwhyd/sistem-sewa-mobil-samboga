@@ -22,7 +22,7 @@
   <?php endif ?>
     
     <div class="col-12">
-      <form id="formUser" class="mb-3" action="<?= base_url('admin/add-user') ?>" method="POST" enctype="multipart/form-data">
+      <form id="formUser" class="mb-3" action="<?= base_url('admin/user/add-user') ?>" method="POST" enctype="multipart/form-data">
         <div class="card mb-4">
           <div class="card-header row">
             <div class="col-md-12 mb-3">
