@@ -115,9 +115,9 @@
           <div class="container-xxl flex-grow-1 container-p-y">
             <div class="row mb-5">
               <?php foreach ($armadas as $key => $armada) : ?>
-                <div class="col-md-6 col-lg-4 mb-3">
+                <div class="mb-3 col-md-6 col-lg-3">
                   <div class="card">
-                    <img class="card-img-top" src="<?= $armada['image']; ?>" alt="Card image cap" />
+                    <img class="card-img-top" src="<?= base_url('images/') . $armada['image']; ?>" alt="Card image cap" />
                     <div class="card-body">
                       <h5 class="card-title">
                         <?= $armada['name']; ?>
