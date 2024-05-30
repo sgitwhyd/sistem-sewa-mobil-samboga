@@ -65,8 +65,7 @@
                   <i class="bx bx-dots-vertical-rounded"></i>
                 </button>
                 <div class="dropdown-menu">
-                  <button type="button" class="dropdown-item view-detail" data-id="<?= $value['id']; ?>"><i class='bx bxs-file-find me-1'></i> View</button>
-                  <a class="dropdown-item" href="<?= base_url('admin/user/edit-user/' . $value['id']); ?>"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                  <a class="dropdown-item" href="<?= base_url('admin/user/edit-user/' . $value['id']); ?>"><i class="bx bx-edit-alt me-1"></i> Detail</a>
                   <form action="<?= base_url('admin/user/delete') ?>" method="POST" style="display:inline;">
                     <input type="hidden" name="id" value="<?= $value['id']; ?>">
                     <button type="submit" class="dropdown-item" onclick="return confirm('Are you sure you want to delete this item?');"><i class="bx bx-trash me-1"></i>Delete</button>
@@ -90,30 +89,6 @@
 <script>
   $(document).ready(function() {
     $('#tableUser').DataTable();
-
-    $('#tableUser tbody').on('click', '.view-detail', function() {
-      var itemId = $(this).data('id');
-
-      $.ajax({
-        url: "<?= base_url('admin/user/detail/'); ?>" + itemId,
-        type: 'GET',
-        success: function(data) {
-          $('#detailUser').html('<dl class="row mt-2">\
-                    <dt class="col-sm-3">First Nama</dt>\
-                    <dd class="col-sm-9">' + data['first_name'] + '</dd>\
-                    <dt class="col-sm-3">Last Nama</dt>\
-                    <dd class="col-sm-9">' + data['last_name'] + '</dd>\
-                    <dt class="col-sm-3">Alamat</dt>\
-                    <dd class="col-sm-9">' + data['address'] + '</dd>\
-                    <dt class="col-sm-3">No Telp</dt>\
-                    <dd class="col-sm-9">' + data['telp'] + '</dd>\
-                    <dt class="col-sm-3">Identitas</dt>\
-                    <dd class="col-sm-9"><img width="200px" src="<?= base_url('users/') ?>' + data['ktp_image'] + '" alt="identity"></dd>\
-                  </dl>');
-          $('#viewUser').modal('show');
-        }
-      });
-    });
   });
 </script>
 

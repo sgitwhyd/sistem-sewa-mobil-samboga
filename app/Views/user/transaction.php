@@ -10,33 +10,11 @@
 <?= $this->endSection(); ?>
 
 <?= $this->section('content'); ?>
-
-<!-- modal view Transaction -->
-<div class="modal fade" id="viewTransaction" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Detail Transaction</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" id="detailTransaction">
-        <!-- modal body -->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"> Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <?php if (session()->has('success')) : ?>
   <div class="alert alert-success" role="alert">
     <?= session('success'); ?>
   </div>
 <?php endif ?>
-<div class="mb-3">
-  <!-- <a href="#" class="btn btn-primary"><i class='bx bx-plus me-1'></i> Tambah</a> -->
-</div>
 <div class="card mb-4">
   <div class="card-body">
     <h5 class="card-title">Daftar Transaction</h5>
@@ -82,7 +60,7 @@
                   <i class="bx bx-dots-vertical-rounded"></i>
                 </button>
                 <div class="dropdown-menu">
-                  <button type="button" class="dropdown-item view-detail" data-id="<?= $value['id']; ?>"><i class='bx bxs-file-find me-1'></i> View</button>
+                  <a href="<?= base_url('/user/transaksi/detail/') . $value['id'] ?>" class="dropdown-item view-detail"><i class='bx bxs-file-find me-1'></i> Detail</a>
                 </div>
               </div>
             </td>
@@ -114,42 +92,6 @@
         currency: 'IDR',
         minimumFractionDigits: 0,
         maximumFractionDigits: 0
-      });
-      $.ajax({
-        url: "<?= base_url('user/transaksi/detail/'); ?>" + itemId,
-        type: 'GET',
-        contentType: {
-          'Content-Type': 'application/json',
-        },
-        dataType: 'JSON',
-        success: function(data) {
-          $('#detailTransaction').html('<dl class="row mt-2">\
-                    <dt class="col-sm-3">Nama Pelanggan</dt>\
-                    <dd class="col-sm-9">' + data['first_name'] + ' ' + data['last_name'] + '</dd>\
-                    <dt class="col-sm-3">Armada</dt>\
-                    <dd class="col-sm-9">' + data['vehicle_name'] + '</dd>\
-                    <dt class="col-sm-3">Total Price</dt>\
-                    <dd class="col-sm-9">' + currency.format(data['total']) + '</dd>\
-                    <dt class="col-sm-3">Status</dt>\
-                    <dd class="col-sm-9">'+ data['status']+'</dd>\
-                    <dt class="col-sm-3">Pickup Date</dt>\
-                    <dd class="col-sm-9">'+ data['date_pickup'] + ' ' + data['time_pickup'] +'</dd>\
-                    <dt class="col-sm-3">Drop Date</dt>\
-                    <dd class="col-sm-9">'+ data['date_dropoff'] + ' ' + data['time_dropoff'] +'</dd>\
-                    <dt class="col-sm-3">Pickup Address</dt>\
-                    <dd class="col-sm-9">'+ data['pickup_address']+'</dd>\
-                    <dt class="col-sm-3">Bank</dt>\
-                    <dd class="col-sm-9">'+ data['bank_number'] + ' - ' + data['bank_name'] + ' - ' + data['bank_owner'] +'</dd>\
-                    <dt class="col-sm-3">Payment Info</dt>\
-                    <dd class="col-sm-9"><img width="100px" src="<?= base_url('transactions/') ?>' + data['payment_image'] + '" alt="payment-image"></dd>\
-                    </dl>');
-          $('#viewTransaction').modal('show');
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-          // Improved error handling
-          console.error('Error fetching transaction details:', textStatus, errorThrown);
-          alert('Failed to fetch transaction details. Please try again later.');
-        }
       });
     });
   });

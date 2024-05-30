@@ -228,8 +228,7 @@ class TransactionController extends BaseController
 
     public function detail($id)
     {
-        try {
-            $transactionModel = new Transactions();
+      $transactionModel = new Transactions();
             // Join with the users table
             $order = $transactionModel->select('transactions.*, vehicles.name vehicle_name, vehicles.daily_price, users.first_name, users.last_name, banks.*')
                 ->join('vehicles', 'vehicles.id = transactions.vehicle_id')
@@ -237,15 +236,7 @@ class TransactionController extends BaseController
                 ->join('banks', 'banks.id = transactions.bank_id')
                 ->find($id);
 
-            if (!$order) {
-                return $this->response->setStatusCode(ResponseInterface::HTTP_NOT_FOUND)->setJSON(['error' => 'Transaction not found']);
-            }
 
-            return $this->response->setStatusCode(ResponseInterface::HTTP_OK)->setJSON($order);
-        } catch (Exception $e) {
-            log_message('error', $e->getMessage());
-            return $this->response->setStatusCode(ResponseInterface::HTTP_INTERNAL_SERVER_ERROR)->setJSON(['error' => 'Internal Server Error']);
-        }
-        // return $this->respond($orders);
+        return view('user/detail-transaction', ['transaction' => $order]);
     }
 }
