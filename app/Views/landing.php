@@ -315,7 +315,8 @@
         });
  
         // 
-        const vehicles = <?= json_encode($vehicles); ?>
+        const vehicles = <?= json_encode($vehicles); ?>;
+        const imageBaseUrl = '<?= base_url('images/') ?>';
 
         const vehiclesPerPage = 3;
         let currentPage = 1;
@@ -339,9 +340,7 @@
                 vehicleDiv.className = 'col-md-6 col-lg-4 mb-4';
                 vehicleDiv.innerHTML = `
                     <div class="listing d-block align-items-stretch">
-                        <div class="listing-img h-100 mr-4">
-                            <img src="${vehicle.image}" alt="Image" class="img-fluid">
-                        </div>
+                       <img src="${imageBaseUrl}/${vehicle.image}" alt="Image" class="img-fluid mb-3">
                         <div class="listing-contents h-100">
                             <h3><strong>${vehicle.name}</strong></h3>
                             <div class="rent-price">
