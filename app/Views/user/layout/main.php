@@ -121,34 +121,35 @@
         <!-- / Layout page -->
       </div>
     </div>
-    <!-- / Layout wrapper -->
+  </div>
+  <!-- / Layout wrapper -->
 
 
 
-    <!-- Core JS -->
-    <!-- build:js assets/vendore/js/core.js -->
+  <!-- Core JS -->
+  <!-- build:js assets/vendore/js/core.js -->
 
-    <script src="<?= base_url('/'); ?>dashboard/assets/vendore/libs/jquery/jquery.js"></script>
-    <script src="<?= base_url('/'); ?>dashboard/assets/vendore/libs/popper/popper.js"></script>
-    <script src="<?= base_url('/'); ?>dashboard/assets/vendore/js/bootstrap.js"></script>
-    <script src="<?= base_url('/'); ?>dashboard/assets/vendore/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="<?= base_url('/'); ?>dashboard/assets/vendore/js/menu.js"></script>
+  <script src="<?= base_url('/'); ?>dashboard/assets/vendore/libs/jquery/jquery.js"></script>
+  <script src="<?= base_url('/'); ?>dashboard/assets/vendore/libs/popper/popper.js"></script>
+  <script src="<?= base_url('/'); ?>dashboard/assets/vendore/js/bootstrap.js"></script>
+  <script src="<?= base_url('/'); ?>dashboard/assets/vendore/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+  <script src="<?= base_url('/'); ?>dashboard/assets/vendore/js/menu.js"></script>
 
-    <!-- endbuild -->
+  <!-- endbuild -->
 
-    <!-- vendores JS -->
-    <script src="<?= base_url('/'); ?>dashboard/assets/vendore/libs/apex-charts/apexcharts.js"></script>
+  <!-- vendores JS -->
+  <script src="<?= base_url('/'); ?>dashboard/assets/vendore/libs/apex-charts/apexcharts.js"></script>
 
-    <!-- Main JS -->
-    <script src="<?= base_url('/'); ?>dashboard/assets/js/main.js"></script>
+  <!-- Main JS -->
+  <script src="<?= base_url('/'); ?>dashboard/assets/js/main.js"></script>
 
-    <!-- Page JS -->
-    <script src="<?= base_url('/'); ?>dashboard/assets/js/dashboards-analytics.js"></script>
+  <!-- Page JS -->
+  <script src="<?= base_url('/'); ?>dashboard/assets/js/dashboards-analytics.js"></script>
 
-    <?= $this->renderSection('script'); ?>
+  <?= $this->renderSection('script'); ?>
 
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 
 </html>

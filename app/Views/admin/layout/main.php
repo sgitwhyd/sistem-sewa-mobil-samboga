@@ -130,6 +130,7 @@
         <!-- / Layout page -->
       </div>
     </div>
+  </div>
     <!-- / Layout wrapper -->
 
 
