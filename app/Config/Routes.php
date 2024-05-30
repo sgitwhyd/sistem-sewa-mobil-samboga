@@ -37,6 +37,7 @@ $routes->group('admin', ['filter' => ['auth','authorized:manage_admin']], functi
 
    // admin profile
    $routes->get('profile', 'ProfileController::index');
+   $routes->post('profile', 'ProfileController::update');
 
    // admin armada
    $routes->get('armada', 'ArmadaController::index');

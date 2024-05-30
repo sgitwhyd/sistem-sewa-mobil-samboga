@@ -20,6 +20,11 @@
       </ul>
     </div>
   <?php endif ?>
+  <?php if (session()->has('success')) : ?>
+  <div class="alert alert-success" role="alert">
+    <?= session('success'); ?>
+  </div>
+<?php endif ?>
     
     <div class="col-12">
       <form id="formUser" class="mb-3" action="" method="POST" enctype="multipart/form-data">
@@ -60,6 +65,7 @@
             <div class="mb-3">
               <label for="ktp_image" class="form-label">Gambar Identitas</label>
               <input class="form-control" type="file" id="ktp_image" name="ktp_image" >
+              <img src="<?= base_url('users/') . $user['ktp_image']; ?>" alt="image-preview" id="previewImage" class="mt-3">
             </div>
             <hr>
             <div class="form-group">
@@ -102,6 +108,23 @@
       $('input').val('');
       $('textarea').text('');
   }
+
+  const imagePreview = document.getElementById('previewImage');
+  const originalImage = imagePreview.getAttribute('src');
+  imagePreview.style.width = '200px';
+  imagePreview.style.height = 'auto';
+
+  const image = document.getElementById('ktp_image');
+  image.addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function() {
+        imagePreview.src = reader.result;
+      }
+      reader.readAsDataURL(file);
+    }
+  });
 
   $(document).ready(function () {
     $('#role').val('<?= $user['role']; ?>').trigger('change')

@@ -29,13 +29,13 @@ class TransactionController extends BaseController
                 'transaction' => $orders
             ];
             return view('admin/transaction', $data);
-        } else {
-            // Join with the users table
+        } else if (session('user')['role'] == 'USER'){
+
             $user_id = session('user')['id'];
             $orders = $transModel->select('transactions.*, vehicles.name vehicle_name, vehicles.daily_price, users.first_name, users.last_name')
                 ->join('vehicles', 'vehicles.id = transactions.vehicle_id')
                 ->join('users', 'users.id = transactions.user_id')
-                ->orderby('transactions.id', 'ASC')
+                ->where('transactions.user_id', $user_id)
                 ->findAll();
 
             $data = [
