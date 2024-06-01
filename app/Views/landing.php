@@ -85,8 +85,8 @@
                     <div class="col-lg-12">
                         <div class="row mb-5">
                             <div class="col-12 intro">
-                                <h2 class="text-center">
-                                    <strong> Samboga Rent Car</strong> adalah penyedia jasa sewa mobil terpercaya yang hadir untuk menemani perjalanan Anda. Kami menawarkan berbagai jenis mobil yang sesuai dengan kebutuhan dan budget Anda, mulai dari city car yang lincah hingga SUV yang tangguh untuk menjelajahi alam.
+                                <h2 class="text-justify">
+                                    <strong> Samboga Rent Car</strong><p>Penyedia jasa sewa mobil terpercaya yang hadir untuk menemani perjalanan Anda. Kami menawarkan berbagai jenis mobil yang sesuai dengan kebutuhan dan budget Anda, mulai dari city car yang lincah hingga SUV yang tangguh untuk menjelajahi alam.</p>
                                 </h2>
                             </div>
                         </div>
