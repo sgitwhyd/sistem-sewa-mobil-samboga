@@ -116,7 +116,8 @@ class TransactionController extends BaseController
                 'errors' => [
                     'required' => 'Jam pengembalian tidak boleh kosong!'
                 ]
-            ],            'pickup_address' => [
+            ],            
+            'pickup_address' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Alamat pengambilan tidak boleh kosong!'

@@ -36,6 +36,32 @@
 <?php endif ?>
 <div class="mb-3">
   <!-- <a href="#" class="btn btn-primary"><i class='bx bx-plus me-1'></i> Tambah</a> -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <form action="<?= base_url('admin/transaksi/exportPDF'); ?>" method="post">
+        <?= csrf_field(); ?>
+      <h5 class="card-title">Export PDF</h5>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="startPeriode" class="form-label">Dari</label>
+            <input type="date" class="form-control" name="startPeriode" id="startPeriode" required>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="endedPeriode" class="form-label">Sampai</label>
+            <input type="date" class="form-control" name="endedPeriode" id="endedPeriode" required>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="buttonExport" class="form-label">_</label>
+            <button class="form-control btn btn-danger">Export PDF
+              <a href="<?= base_url('admin/transaksi/exportPDF'); ?>"></a>
+            </button>
+          </div>
+        </div>
+      </div>
+      </form>
+    </div>
+  </div>
 </div>
 <div class="card mb-4">
   <div class="card-body">

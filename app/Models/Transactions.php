@@ -23,5 +23,5 @@ class Transactions extends Model
        'payment_image',
    ];
 
-   protected $useTimestamps = false;
+   protected $useTimestamps = true;
 }

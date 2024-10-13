@@ -74,5 +74,7 @@ $routes->group('admin', ['filter' => ['auth','authorized:manage_admin']], functi
    $routes->post('transaksi/edit-transaksi/(:num)', 'TransactionController::update/$1');
    $routes->post('transaksi/delete', 'TransactionController::destroy');
    $routes->get('transaksi/detail/(:num)', 'TransactionController::detail/$1');
+   // export transaction
+   $routes->post('transaksi/exportPDF', 'PdfController::generatePdf');
 
 });
