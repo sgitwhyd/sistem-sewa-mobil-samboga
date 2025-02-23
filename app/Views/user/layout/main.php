@@ -76,8 +76,8 @@
                           </div>
                         </div>
                         <div class="flex-grow-1">
-                          <span class="fw-medium d-block"><?= session('user')['first_name'] . ' ' . session('user')['first_name']; ?></span>
-                          <small class="text-muted"><?= session('user')['role']; ?></small>
+                          <span class="fw-medium d-block"><?= session('user')['first_name'] . ' ' . session('user')['last_name']; ?></span>
+                          <small class="text-muted"><?= session('user')['role'] === "USER" ? "Pengguna" :  session('user')['role']; ?></small>
                         </div>
                       </div>
                     </a>

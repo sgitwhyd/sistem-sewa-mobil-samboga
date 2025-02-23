@@ -78,8 +78,14 @@
         </div>
         <div class="d-flex flex-column mb-3">
           <label for="status" class="form-label">Status</label>
-          <input type="text" class="form-control" value="<?= $transaction['status']  ?>">
+          <input type="text" class="form-control" disabled value="<?= $transaction['status']  ?>">
         </div>
+        <?php if ($transaction['status'] == 'REJECTED') : ?>
+          <div class="d-flex flex-column mb-3">
+            <label for="status" class="form-label">Alasan Pembatalan</label>
+            <textarea disabled class="form-control"><?= $transaction['note']  ?></textarea>
+        </div>
+        <?php endif; ?>
         <div class="d-flex flex-column mb-3">
           <label for="payment_image" class="form-label">Bukti Pembayaran</label>
           <img width="200px" height="auto" src="<?= base_url('transactions/') . $transaction['payment_image']; ?>" alt="payment-image">

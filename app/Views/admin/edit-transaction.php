@@ -104,6 +104,11 @@
             <option value="FINISHED">FINISHED</option>
           </select>
         </div>
+        <div class="mb-3" id="reject_wrapper">
+          <label for="note" class="form-label">Alasan Reject</label>
+          <textarea name="note" id="note" class="form-control"
+          ></textarea>
+        </div>
         <hr>
         <div class="col-md-6">
           <button type="submit" class="btn btn-primary"><i class='bx bx-paper-plane'></i> Simpan</button>
@@ -118,6 +123,22 @@
 <?= $this->section('script'); ?>
 <script>
   $(document).ready(function() {
+    $('#reject_wrapper').hide();
+
+  if ($('#confirmation').val() === 'REJECTED') {
+    $('#reject_wrapper').show();
+    $('#note').attr('required', true);
+  }
+
+  $('#confirmation').on('change', function() {
+    if ($(this).val() === 'REJECTED') {
+      $('#reject_wrapper').show();
+      $('#note').attr('required', true);
+    } else {
+      $('#reject_wrapper').hide();
+      $('#note').removeAttr('required');
+    }
+  });
 
     // editable value
     $('#customer').val('<?= $transaction['user_id']; ?>').trigger('change');
@@ -130,6 +151,8 @@
     $('#pickup_address').text('<?= $transaction['pickup_address']; ?>');
     $('#bank').val('<?=  $banks['bank_number'] . ' - ' . $banks['bank_name'] . ' - ' . $banks['bank_owner'] ?>');
     $('#subtotal').val('Rp. <?= number_format($transaction['total']); ?>');
+    $('#note').text('<?= $transaction['note']; ?>');
+
 
 
     $(document).on({

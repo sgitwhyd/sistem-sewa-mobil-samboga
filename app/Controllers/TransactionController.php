@@ -213,7 +213,15 @@ class TransactionController extends BaseController
 
         // Insert data ke database menggunakan model
         $model = new Transactions();
-        $model->update($old_transaction['id'], $status);
+        $updateData = [
+            'status' => $post_data['status'],
+        ];
+
+        if (!empty($post_data['note'])) {
+            $updateData['note'] = $post_data['note'];
+        }
+
+        $model->update($old_transaction['id'], $updateData);
 
         return redirect()->to(base_url('admin/transaksi'))->with('success', 'Transaksi berhasil dikonfirmasi.');
     }

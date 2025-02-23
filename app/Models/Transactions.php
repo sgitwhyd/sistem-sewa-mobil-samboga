@@ -21,6 +21,7 @@ class Transactions extends Model
        'total',
        'status',
        'payment_image',
+       'note',
    ];
 
    protected $useTimestamps = true;

@@ -117,7 +117,7 @@
               <?php foreach ($armadas as $key => $armada) : ?>
                 <div class="mb-3 col-md-6 col-lg-3">
                   <div class="card">
-                    <img class="card-img-top" src="<?= base_url('images/') . $armada['image']; ?>" alt="Card image cap" />
+                   <img class="card-img-top" src="<?= !empty($armada['image']) ? base_url('images/') . $armada['image'] : 'https://picsum.photos/500'; ?>" alt="<?= $armada['name']; ?>" />
                     <div class="card-body">
                       <h5 class="card-title">
                         <?= $armada['name']; ?>

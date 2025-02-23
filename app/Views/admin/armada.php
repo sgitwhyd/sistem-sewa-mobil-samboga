@@ -55,7 +55,7 @@
         <?php foreach ($armada as $key => $value) : ?>
           <tr>
             <td style="text-align:center;"><?= $key + 1; ?>.</td>
-            <td><img width="100px" src="<?= base_url('images/') . $value['image']; ?>" alt="car-image"></td>
+          <td><img width="100px" src="<?= !empty($value['image']) ? base_url('images/') . $value['image'] : 'https://picsum.photos/500'; ?>" alt="<?= $value['name']; ?>"></td>
             <td><?= $value['name']; ?></td>
             <td><?= $value['description']; ?></td>
             <td>Rp. <?= number_format($value['daily_price']); ?></td>
